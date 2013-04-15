@@ -101,9 +101,64 @@
 
       <article class="column tencol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">keys: SSH Keys</h1>
+    <h1 class="title">CLI Conventions</h1>
   </div>
-  <div class="content"></div>
+  <div class="content"><p><hr>
+<em>If you haven&#39;t already installed <a href="/a-quickstart/installation">baton and quill</a> you should <strong>do so now before continuing.</strong></em></p>
+<hr>
+
+<p>Both <a href="/baton"><code>baton</code></a> and <a href="/quill"><code>quill</code></a> use similar conventions to <a href="https://github.com/nodejitsu/jitsu"><code>jitsu</code></a>, the CLI tool for the Nodejitsu public cloud. So if you&#39;re familiar with <a href="https://github.com/nodejitsu/jitsu"><code>jitsu</code></a>, <em>you can probably skip this.</em></p>
+<ul>
+<li><a href="#resources">CLI Resources</a></li>
+<li><a href="#aliases">Common Aliases</a></li>
+<li><a href="#prompts">Prompts and Overrides</a></li>
+</ul>
+<p><hr>
+<a name="resources"></a></p>
+<h2>CLI Resources</h2>
+<p>Similar to <a href="https://github.com/nodejitsu/jitsu"><code>jitsu</code></a>, all operations are broken up into logical resources which represent a set of actions on entities like <code>servers</code> or <code>systems</code>. </p>
+<pre><code>  $ baton &lt;resource&gt; &lt;command&gt;</code></pre>
+<p>The list of common resources is displayed in the default help for both <a href="/baton"><code>baton</code></a> and <a href="/quill"><code>quill</code></a>:</p>
+<p><img src="/img/screenshots/baton.png" />
+<img src="/img/screenshots/quill.png" /></p>
+<p>The commands for any of these resources are listed in the help for that resource. In this way both <code>baton</code> and <code>quill</code> are designed to be self-documenting via the <code>baton help</code> command. For example to get help about <code>baton servers</code> just run <code>baton help servers</code>:</p>
+<pre><code>$ baton help servers
+info:   Welcome to baton
+info:   It worked if it ends with baton ok
+info:   Executing command servers
+help:   `baton servers *` commands work with raw and managed server resources
+help:   
+help:   baton servers create
+help:   baton servers createimage
+help:   baton servers createraw
+help:   baton servers run
+help:   baton servers test &lt;role&gt;
+help:   baton servers listraw
+help:   baton servers listraw &lt;pattern&gt;
+help:   baton servers view &lt;id&gt;
+help:   baton servers rename &lt;id&gt; &lt;name&gt;
+help:   baton servers delete &lt;id&gt;
+help:   
+help:   Options:
+(...)</code></pre>
+<p><em><strong>Remark:</strong> The above is equivalent to</em> <code>baton servers --help</code> <em>or</em> <code>baton servers -h</code>.</p>
+<p><hr>
+<a name="aliases"></a></p>
+<h2>Common Aliases</h2>
+<p>Most common operations have a short-hand or <em>alias.</em> For example to list all systems available with <code>quill</code> the following two commands are equivalent:</p>
+<pre><code>  $ quill systems list
+  $ quill list</code></pre>
+<p>For a list of all aliases for <code>baton</code> and <code>quill</code> see the links below:</p>
+<ul>
+<li><a href="/baton/aliases"><code>baton</code> aliases</a></li>
+<li><a href="/quill/aliases"><code>quill</code> aliases</a></li>
+</ul>
+<p><hr>
+<a name="prompts"></a></p>
+<h2>Prompts and Overrides</h2>
+<p>Many of the commands in both <code>baton</code> and <code>quill</code> have additional CLI parameters. If these parameters are not provided you will be prompted to enter them.</p>
+<p>Most commands display the available prompts in their CLI help.</p>
+</div>
 </div></article>
     </section>
   </div>

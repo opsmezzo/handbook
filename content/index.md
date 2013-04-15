@@ -1,19 +1,13 @@
-The Nodejitsu enterprise documentation is designed around several top-level concepts that you will need to be familiar with in order to use the product effectively:
+_OpsMezzo_ is a complete solution to your provisioning and orchestration infrastructure needs. This documentation will:
 
-* [Managing][quill] [systems][systems] with `system.json` and `quill`
-* [Provisioning servers][baton] from roles with `baton`
-* Configuring pre-defined systems such as _Orchestrion_ based monitoring.
-* Understanding the underlying [REST APIs][rest] and [CLI conventions][conventions].
+* Give you an [understanding of `system.json` manifests][systems].
+* [How to use `quill`][quill] to install, publish, and configure `system.json` packages.
+* Get to know the [CLI conventions][conventions] 
 
-<hr>
-**If this is your first time reading this documentation read _[Installation Quickstart][install]_**
-<hr>
+In the future more of OpsMezzo's features (including those that are not Open Source) will be available here.
 
-[install]: /a-quickstart
 [quill]: /quill
 [systems]: /system-json
-[baton]: /baton
-[rest]: /conservatory/api
-[conventions]: /a-quickstart/using-conventions
+[conventions]: /using-conventions
 
-[meta:title]: <> (Inside Nodejitsu)
+[meta:title]: <> (Getting started with OpsMezzo)

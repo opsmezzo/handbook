@@ -1,7 +1,7 @@
 {
   "name": "handbook",
-  "subdomain": "opsmezzo",
   "version": "1.0.0",
+  "subdomain": "opsmezzo",
   "description": "All documentation about OpsMezzo",
   "main": "bin/server",
   "scripts": {
