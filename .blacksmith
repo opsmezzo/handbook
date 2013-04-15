@@ -1,0 +1,23 @@
+{
+  "pages": {
+    "index": {
+      "partial": "article",
+      "partials": {
+        "toc": {
+          "partial": "topic",
+          "tree": "article",
+          "truncate": true
+        }
+      }
+    },
+    "article": {
+      "partials": {
+        "toc": {
+          "partial": "topic",
+          "tree": "article",
+          "truncate": true
+        }
+      }
+    }
+  }
+}

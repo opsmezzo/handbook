@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+
+  <title>The Nodejitsu Handbook</title>
+
+  <meta name="description" content="The Nodejitsu Handbook - A gentle introduction to the art of Nodejitsu" />
+  <meta name="author" content="Nodejitsu Inc" />
+  <meta name="viewport" content="width=device-width" />
+
+  <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
+  <link rel="stylesheet" href="/css/monokai.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+
+<body class="container">
+  <section id="navigation" class="navigation">
+    <nav class="row">
+      <h1>
+        <a href="/" class="logo" title="Back to the homepage">Nodejitsu</a>
+      </h1>
+      <a href="#navigation" class="mobile btn ss-rows"></a>
+      <a href="https://www.nodejitsu.com" class=" login right btn" title="Back to nodejitsu.com">
+        <s class="ss-home" role="presentation"></s>
+        home
+      </a>
+    </nav>
+  </section>
+  <div class="faux-columns">
+    <section class="documentation row">
+      <aside class="sidebar twocol" role="complementary">
+        <div id="toc">
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/quill" class="title">Using quill</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/aliases" class="title">Common Aliases</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/config" class="title">Quill configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/updating-systems" class="title">Updating systems</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/system-json" class="title">Working with system.json</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/examples" class="title">Examples</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/templating" class="title">system-json/templating</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/reference" class="title">system.json Reference</a>
+    </span>
+  </span>
+</div>
+</div>
+      </aside>
+
+      <article class="column tencol last" id="content" role="main"><div>
+  <div class="page-details">
+    <h1 class="title">Working with system.json</h1>
+  </div>
+  <div class="content"><hr>
+
+<p><code>system.json</code> is a <em>simple and hierarchical</em> file format for describing OS-level (and OS agnostic) packages to be installed with <a href="/baton">baton</a> and <a href="/quill">quill</a>. It is based on the widely popular <a href="https://github.com/isaacs/npm/blob/master/doc/cli/json.md"><code>package.json</code></a> specification used with <a href="http://nodejs.org"><code>node.js</code></a> and <a href="http://npmjs.org"><code>npm</code></a>.</p>
+<p>To learn more about the <code>system.json</code> format consider the material below:</p>
+<ul>
+<li><a href="#anatomy">Anatomy of a <code>system.json</code></a></li>
+<li><a href="#changes">Changes from <code>package.json</code></a></li>
+<li><a href="#ignore">Ignoring files</a></li>
+<li><a href="/system-json/lifecycle">Lifecycle of a System</a></li>
+<li><a href="/system-json/templating">System configuration</a></li>
+<li><a href="/system-json/examples">Examples</a></li>
+<li><a href="/system-json/reference">Full <code>system.json</code> Reference</a></li>
+</ul>
+<hr>
+
+<p><a name="anatomy"></a></p>
+<h2>Anatomy of a <code>system.json</code></h2>
+<p>Lets look at a simple <code>system.json</code> script for installing <a href="http://redis.io">Redis</a>:</p>
+<pre><code class="lang-js">  {
+    <span class="string">"name"</span>: <span class="string">"redis"</span>,
+    <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,
+    <span class="string">"description"</span>: <span class="string">"Install redis with sane defaults"</span>,
+    <span class="string">"keywords"</span>: [<span class="string">"redis"</span>, <span class="string">"nosql"</span>, <span class="string">"databases"</span>],
+    <span class="string">"author"</span>: <span class="string">"Nodejitsu Inc &lt;info@nodejitsu.com&gt;"</span>,
+    <span class="string">"os"</span>: {
+      <span class="string">"ubuntu"</span>: { <span class="string">"ubuntu-base"</span>: <span class="string">"0.1.x"</span> }
+    }
+  }</code></pre>
+<p>Like <em>every system,</em> the directory structure is as follows:</p>
+<pre><code>  /redis
+    system.json
+    /scripts
+      install.sh
+      configure.sh
+      start.sh
+    /files
+      redis.conf</code></pre>
+<p>Each of the files under <code>/scripts</code> represents what to run for each <a href="/system-json/lifecycle">lifecycle action</a> for a given Redis server:</p>
+<ul>
+<li>All of these scripts will be run from inside that directory.</li>
+<li>Any <a href="/system-json/templating">system configuration</a> will be passed to these scripts via environment variables prefixed with <code>quill_</code>.</li>
+</ul>
+<p>All of the files under <code>/files</code> will be templated with any <a href="/system-json/templating">system configuration</a> during the <em>configure lifecycle action.</em> This is to allow for reuse of configurable servers images. That is, to prevent the need to create new images each time a configuration setting is changed.</p>
+<p><hr>
+<a name="changes"></a></p>
+<h2>Changes from <code>package.json</code></h2>
+<p>The <code>system.json</code> focuses on adding several key properties to <code>package.json</code> for OS-level package management:</p>
+<ul>
+<li><code>runlist</code>: The key difference between language package managers like <code>npm</code> and OS package managers like <code>apt</code> is that <strong>order matters.</strong> The runlist property (similar to Chef) specifies the order in which <code>dependencies</code> should be installed.</li>
+<li><code>os</code>: This property allows <code>system.json</code> to be OS-agnostic. The <code>os</code> property is a set of dependencies to only install on a certain OS.</li>
+</ul>
+<h3>Removed from <code>package.json</code></h3>
+<p>There are also several properties which are removed since they are only applicable to node.js packages: <code>bundleDependencies</code>, <code>cpu</code>, <code>devDependencies</code>, <code>engines</code>, <code>engineStrict</code>, <code>files</code>, <code>main</code>, <code>optionalDependencies</code>, <code>preferGlobal</code>, <code>private</code>, <code>publishConfig</code>, <code>scripts</code></p>
+<p>There are also several npm convenience features which are not implemented but may be implemented in the future</p>
+<ul>
+<li><code>bin</code> property</li>
+<li><code>directories</code> property<ul>
+<li><code>directories.bin</code></li>
+<li><code>directories.man</code></li>
+<li><code>directories.doc</code></li>
+</ul>
+</li>
+<li><code>man</code> property</li>
+<li>Git URLs as Dependencies</li>
+<li>URLs as Dependencies</li>
+</ul>
+<p><hr>
+<a name="ignore"></a></p>
+<h2>Ignoring files</h2>
+<p>When publishing a system.json, <a href="/quill">quill</a> will attempt to parse the <code>.quillignore</code> file in the system.json directory. If no <code>.quillignore</code> is found then <a href="/quill">quill</a> will fall back to a <code>.gitignore</code> file. e.g.</p>
+<p><strong>.quillignore</strong></p>
+<pre><code>  *.swp
+  .DS_Store</code></pre>
+<p>The above <code>.quillignore</code> file will ensure that files matching those patterns are not included when the system.json is published.</p>
+</div>
+</div></article>
+    </section>
+  </div>
+  <!-- row -->
+
+  <footer class="doormat">
+    <section class="row">
+      <dl class="twocol">
+        <dt>Resources</dt>
+        <dd>
+          <a href="http://legal.nodejitsu.com/privacy">
+            Privacy policy
+          </a>
+        </dd>
+        <dd>
+          <a href="http://legal.nodejitsu.com/terms-of-service">
+            Terms of Service
+          </a>
+        </dd>
+      </dl>
+      <dl class="newsletter twocol right">
+        <dt>Stay connected</dt>
+        <dd>
+          <ul class="social">
+            <li>
+              <a href="https://twitter.com/nodejitsu" class="ss-twitter ss-social-circle" title="Follow @nodejitsu on Twitter"></a>
+            </li>
+            <li>
+              <a href="https://github.com/nodejitsu" class="ss-octocat ss-social-circle" title="Fork @nodejitsu on Github"></a>
+            </li>
+            <li class="copyright right">&copy; Nodejitsu Inc.</li>
+          </ul>
+        </dd>
+      </dl>
+
+    </section>
+  </footer>
+  <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  <script>
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

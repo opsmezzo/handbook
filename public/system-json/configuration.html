@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+
+  <title>The Nodejitsu Handbook</title>
+
+  <meta name="description" content="The Nodejitsu Handbook - A gentle introduction to the art of Nodejitsu" />
+  <meta name="author" content="Nodejitsu Inc" />
+  <meta name="viewport" content="width=device-width" />
+
+  <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
+  <link rel="stylesheet" href="/css/monokai.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+
+<body class="container">
+  <section id="navigation" class="navigation">
+    <nav class="row">
+      <h1>
+        <a href="/" class="logo" title="Back to the homepage">Nodejitsu</a>
+      </h1>
+      <a href="#navigation" class="mobile btn ss-rows"></a>
+      <a href="https://www.nodejitsu.com" class=" login right btn" title="Back to nodejitsu.com">
+        <s class="ss-home" role="presentation"></s>
+        home
+      </a>
+    </nav>
+  </section>
+  <div class="faux-columns">
+    <section class="documentation row">
+      <aside class="sidebar twocol" role="complementary">
+        <div id="toc">
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/quill" class="title">Using quill</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/aliases" class="title">Common Aliases</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/config" class="title">Quill configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/updating-systems" class="title">Updating systems</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/system-json" class="title">Working with system.json</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/examples" class="title">Examples</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/templating" class="title">system-json/templating</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/reference" class="title">system.json Reference</a>
+    </span>
+  </span>
+</div>
+</div>
+      </aside>
+
+      <article class="column tencol last" id="content" role="main"><div>
+  <div class="page-details">
+    <h1 class="title">Configuration management</h1>
+  </div>
+  <div class="content"><p><em>Configuration management</em> refers to configuring a single system running on a remote server.</p>
+<ul>
+<li><a href="#hierarchy">Configuration hierarchy</a></li>
+<li><a href="#scripts-files">Using configuration in system.json files and scripts</a><ul>
+<li><a href="#scripts">Setting environment variables in system.json scripts</a></li>
+<li><a href="#files">Templating system.json files</a></li>
+</ul>
+</li>
+</ul>
+<p><hr>
+<a name="hierarchy"></a></p>
+<h2>Configuration hierarchy</h2>
+<p>The total configuration available to a system.json package is the combination of several levels of configuration hierarchy. The priority of this hierarchy (from highest priority to lowest) is:</p>
+<pre><code>  ├─ `quill --config [key]=[value] --config [name]`
+  ├─ Group
+  ├─ Role
+  └─ System</code></pre>
+<p>So if a <code>key</code> is set in both the [named remote configuration][quill-config] specified by <code>quill --config [name]</code> <strong>and</strong> set by the [named remote configuration][quill-config] specified by the Group, <strong>the value from <code>quill --config [name]</code> will be used.</strong></p>
+<h3>1. quill --config [key]=[value] --config [name]</h3>
+<p>The <code>--config</code> parameter when running any <em>lifecycle action</em> in <code>quill</code>.</p>
+<h3>2. Group</h3>
+<p>[Named remote configuration][quill-config] set on a <a href="/baton/resources/group">group</a>. Group-specific settings (e.g. master API address, file server address or external service login credentials).</p>
+<h3>3. Role</h3>
+<p>[Named remote configuration][quill-config] set on a <a href="/baton/resources/role">role</a>. Role-specific settings (e.g. monitoring systems to enable on a host).</p>
+<h3>4. System</h3>
+<p>Default system-specified configuration set on the <code>system.json</code> file (e.g. default login password or config file name):</p>
+<p><strong>system.json</strong></p>
+<pre><code class="lang-js">  {
+    <span class="comment">// ...</span>
+    <span class="string">"config"</span>: {
+      <span class="string">"key"</span>: <span class="string">"value"</span>,
+      <span class="string">"nested"</span>: {
+        <span class="string">"keys"</span>: <span class="string">"are ok too."</span>
+      }
+    }
+  }</code></pre>
+<p><hr>
+<a name="scripts-files"></a></p>
+<h2>Using configuration in system.json files and scripts</h2>
+<p>For the purposes of configuring systems during a given <em>lifecycle-action</em>, <code>quill</code> supports two ways of injecting config values into files and scripts.</p>
+<p><a name="scripts"></a></p>
+<h3>Setting environment variables in system.json scripts</h3>
+<p>When running any scripts (Bash, etc) scripts for a <em>lifecycle-action</em> <code>quill</code> passes the configuration into process via environment variables.</p>
+<p>Following config:</p>
+<pre><code class="lang-js">  {
+    database: {
+      host: <span class="string">'couch.internal.net'</span>,
+      port: <span class="number">5984</span>,
+      auth: {
+        username: <span class="string">'user'</span>,
+        password: <span class="string">'pass'</span>
+    },
+    value: <span class="number">42</span>
+  }</code></pre>
+<p>when evaluated in the following script:</p>
+<pre><code>  echo &quot;quill_database_host: $quill_database_host&quot;
+  echo &quot;quill_database_port: $quill_database_port&quot;
+  echo &quot;quill_database_auth_username: $quill_database_auth_username&quot;
+  echo &quot;quill_database_quth_password: $quill_database_quth_password&quot;
+  echo &quot;quill_value: $quill_value&quot;
+
+  #
+  # These are also aliased to `q_*` for convenience.
+  #
+  echo &quot;q_value: $q_value&quot;</code></pre>
+<p>will output all of the configuration values as:</p>
+<pre><code>  quill_database_host: couch.internal.net
+  quill_database_port: 5984
+  quill_database_auth_username: user
+  quill_database_auth_password: pass
+  quill_value: 42
+  q_value: 42</code></pre>
+<p><a name="files"></a></p>
+<h3>Templating system.json files</h3>
+<p>Before executing lifecycle scripts, all files located under the <code>/templates</code> directory for a given system are templated accordingly to configuration fetched by <code>quill</code>.</p>
+<p>File:</p>
+<pre><code>  host = {{ host }}
+  port = {{ port }}
+
+  username = {{ auth.username }}
+  password = {{ auth.password }}</code></pre>
+<p>when configuration is:</p>
+<pre><code class="lang-js">  {
+    host: <span class="string">'couch.internal.net'</span>,
+    port: <span class="number">5984</span>,
+    auth: {
+      username: <span class="string">'user'</span>,
+      password: <span class="string">'pass'</span>
+    }
+  }</code></pre>
+<p>will be turned into:</p>
+<pre><code>  host = couch.internal.net
+  port = 5984
+
+  username = user
+  password = pass</code></pre>
+<p>Then, lifecycle scripts can, for example, copy it to application-specific <code>/etc</code> directory:</p>
+<pre><code>  cp ../templates/template-name.conf /etc/file.conf</code></pre>
+<p><strong>Important:</strong> If a configuration key is not found when attempting to template a file <code>quill</code> will respond with an error:</p>
+<pre><code>  error: Error running command install config
+  error: Missing configuration value: nested in ~/.quill/installed/&lt;system&gt;/&lt;version&gt;/templates/&lt;filename&gt;</code></pre>
+<h4>Array Indexing</h4>
+<p><code>quill</code> also supports indexing into Arrays when templating files:</p>
+<pre><code>  hostname = {{ hosts.0 }}</code></pre>
+<p>when configuration is:</p>
+<pre><code class="lang-js">  {
+    hosts: [<span class="string">'host0'</span>, <span class="string">'host1'</span>, <span class="string">'host2'</span>]
+  }</code></pre>
+<p>will be turned into:</p>
+<pre><code>  hostname = host0</code></pre>
+<h4>Dynamic configuration keys</h4>
+<p>Often you need to make decision at configure-time regarding which value in a larger [named remote configuration][quill-config] should be used. In other words, you want the key used to be dynamic. For example:</p>
+<pre><code>  hostname = {{ envs.{{ current }}.hostname }}</code></pre>
+<p>when configuration is:</p>
+<pre><code class="lang-js">  {
+    current: <span class="string">'production'</span>,
+    envs: {
+      production: { hostname: <span class="string">'prod.mysite.com'</span> }
+      staging:    { hostname: <span class="string">'staging.mysite.com'</span> }
+      test:       { hostname: <span class="string">'test.mysite.com'</span> }
+    }
+  }</code></pre>
+<p>will be turned into:</p>
+<pre><code>  hostname = prod.mysite.com</code></pre>
+</div>
+</div></article>
+    </section>
+  </div>
+  <!-- row -->
+
+  <footer class="doormat">
+    <section class="row">
+      <dl class="twocol">
+        <dt>Resources</dt>
+        <dd>
+          <a href="http://legal.nodejitsu.com/privacy">
+            Privacy policy
+          </a>
+        </dd>
+        <dd>
+          <a href="http://legal.nodejitsu.com/terms-of-service">
+            Terms of Service
+          </a>
+        </dd>
+      </dl>
+      <dl class="newsletter twocol right">
+        <dt>Stay connected</dt>
+        <dd>
+          <ul class="social">
+            <li>
+              <a href="https://twitter.com/nodejitsu" class="ss-twitter ss-social-circle" title="Follow @nodejitsu on Twitter"></a>
+            </li>
+            <li>
+              <a href="https://github.com/nodejitsu" class="ss-octocat ss-social-circle" title="Fork @nodejitsu on Github"></a>
+            </li>
+            <li class="copyright right">&copy; Nodejitsu Inc.</li>
+          </ul>
+        </dd>
+      </dl>
+
+    </section>
+  </footer>
+  <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  <script>
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

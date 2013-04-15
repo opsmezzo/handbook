@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+
+  <title>The Nodejitsu Handbook</title>
+
+  <meta name="description" content="The Nodejitsu Handbook - A gentle introduction to the art of Nodejitsu" />
+  <meta name="author" content="Nodejitsu Inc" />
+  <meta name="viewport" content="width=device-width" />
+
+  <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
+  <link rel="stylesheet" href="/css/monokai.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+
+<body class="container">
+  <section id="navigation" class="navigation">
+    <nav class="row">
+      <h1>
+        <a href="/" class="logo" title="Back to the homepage">Nodejitsu</a>
+      </h1>
+      <a href="#navigation" class="mobile btn ss-rows"></a>
+      <a href="https://www.nodejitsu.com" class=" login right btn" title="Back to nodejitsu.com">
+        <s class="ss-home" role="presentation"></s>
+        home
+      </a>
+    </nav>
+  </section>
+  <div class="faux-columns">
+    <section class="documentation row">
+      <aside class="sidebar twocol" role="complementary">
+        <div id="toc">
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/quill" class="title">Using quill</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/aliases" class="title">Common Aliases</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/config" class="title">Quill configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/updating-systems" class="title">Updating systems</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/system-json" class="title">Working with system.json</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/examples" class="title">Examples</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/templating" class="title">system-json/templating</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/reference" class="title">system.json Reference</a>
+    </span>
+  </span>
+</div>
+</div>
+      </aside>
+
+      <article class="column tencol last" id="content" role="main"><div>
+  <div class="page-details">
+    <h1 class="title">system.json Reference</h1>
+  </div>
+  <div class="content"><p>This document is all you need to know about what&#39;s required in your <code>system.json</code> file. It must be actual JSON, not just a JavaScript object literal.</p>
+<p>A lot of the behavior described in this document is affected by the config settings described in config for <a href="/baton/config"><code>baton</code></a> and <a href="/quill/config"><code>quill</code></a>.</p>
+<ul>
+<li><a href="#properties/name"><code>name</code></a></li>
+<li><a href="#properties/version"><code>version</code></a></li>
+<li><a href="#properties/description"><code>description</code></a></li>
+<li><a href="#properties/dependencies"><code>dependencies</code></a></li>
+<li><a href="#properties/runlist"><code>runlist</code></a></li>
+<li><a href="#properties/os"><code>os</code></a></li>
+<li><a href="#properties/config"><code>config</code></a></li>
+<li><a href="#properties/keywords"><code>keywords</code></a></li>
+<li><a href="#properties/homepage"><code>homepage</code></a></li>
+<li><a href="#properties/bugs"><code>bug</code></a></li>
+<li><a href="#properties/people"><code>contributors</code></a>, <a href="#properties/people"><code>author</code></a></li>
+<li><a href="#properties/repository"><code>repository</code></a></li>
+</ul>
+<p><hr>
+<a name="properties/name"></a></p>
+<h3>name</h3>
+<p>The <em>most</em> important things in your system.json are the name and version fields. Those are actually required, and your system won&#39;t install without them. The name and version together form an identifier that is assumed
+to be completely unique. Changes to the system should come along with changes to the version.</p>
+<p>The name is what your thing is called. Some tips:</p>
+<ul>
+<li>Don&#39;t put &quot;system&quot; in the name. It&#39;s assumed that it&#39;s a system, since you&#39;re
+writing a system.json file.</li>
+<li>The name ends up being part of a URL, an argument on the command line, and a
+folder name. Any name with non-url-safe characters will be rejected.
+Also, it can&#39;t start with a dot or an underscore.</li>
+</ul>
+<p><hr>
+<a name="properties/version"></a></p>
+<h3>version</h3>
+<p>The <em>most</em> important things in your system.json are the name and version fields. Those are actually required, and your system won&#39;t install without them. The name and version together form an identifier that is assumed to be completely unique. Changes to the system should come along with changes to the version.</p>
+<p>Version must be parseable by <a href="https://github.com/isaacs/node-semver">node-semver</a>, which is bundled with <code>quill</code> as a dependency.</p>
+<p>Here&#39;s how quill&#39;s semver implementation deviates from what&#39;s on semver.org:</p>
+<ul>
+<li>Versions can start with &quot;v&quot;</li>
+<li>A numeric item separated from the main three-number version by a hyphen will be interpreted as a &quot;build&quot; number, and will <em>increase</em> the version. But, if the tag is not a number separated by a hyphen, then it&#39;s treated as a pre-release tag, and is <em>less than</em> the version without a tag. So, <code>0.1.2-7 &gt; 0.1.2-7-beta &gt; 0.1.2-6 &gt; 0.1.2 &gt; 0.1.2beta</code></li>
+</ul>
+<p>This is a little bit confusing to explain, but matches what you see in practice when people create tags in git like &quot;v1.2.3&quot; and then do &quot;git describe&quot; to generate a patch version.</p>
+<p><hr>
+<a name="properties/description"></a></p>
+<h3>description</h3>
+<p>Put a description in it. It&#39;s a string. This helps people discover your system, as it&#39;s listed in <code>quill list</code>.</p>
+<p><hr>
+<a name="properties/dependencies"></a></p>
+<h3>dependencies</h3>
+<p>Dependencies are specified with a simple hash of system name to version range. The version range is EITHER a string which has one or morespace-separated descriptors, OR a range like &quot;fromVersion - toVersion&quot;</p>
+<p>Version range descriptors may be any of the following styles, where &quot;version&quot; is a semver compatible version identifier.</p>
+<ul>
+<li><code>version</code> Must match <code>version</code> exactly</li>
+<li><code>=version</code> Same as just <code>version</code></li>
+<li><code>&gt;version</code> Must be greater than <code>version</code></li>
+<li><code>&gt;=version</code> etc</li>
+<li><code>&lt;version</code></li>
+<li><code>&lt;=version</code></li>
+<li><code>~version</code> See &#39;Tilde Version Ranges&#39; below</li>
+<li><code>1.2.x</code> See &#39;X Version Ranges&#39; below</li>
+<li><code>http://...</code> See &#39;URLs as Dependencies&#39; below</li>
+<li><code>*</code> Matches any version</li>
+<li><code>&quot;&quot;</code> (just an empty string) Same as <code>*</code></li>
+<li><code>version1 - version2</code> Same as <code>&gt;=version1 &lt;=version2</code>.</li>
+<li><code>range1 || range2</code> Passes if either range1 or range2 are satisfied.</li>
+<li><code>git...</code> See &#39;Git URLs as Dependencies&#39; below</li>
+</ul>
+<p>For example, these are all valid:</p>
+<pre><code class="lang-js">{
+  <span class="string">"dependencies"</span>: {
+    <span class="string">"foo"</span>: <span class="string">"1.0.0 - 2.9999.9999"</span>,
+    <span class="string">"bar"</span>: <span class="string">"&gt;=1.0.2 &lt;2.1.2"</span>,
+    <span class="string">"baz"</span>: <span class="string">"&gt;1.0.2 &lt;=2.3.4"</span>,
+    <span class="string">"boo"</span>: <span class="string">"2.0.1"</span>,
+    <span class="string">"qux"</span>: <span class="string">"&lt;1.0.0 || &gt;=2.3.1 &lt;2.4.5 || &gt;=2.5.2 &lt;3.0.0"</span>,
+    <span class="string">"asd"</span>: <span class="string">"http://asdf.com/asdf.tar.gz"</span>,
+    <span class="string">"til"</span>: <span class="string">"~1.2"</span>,
+    <span class="string">"elf"</span>: <span class="string">"~1.2.3"</span>,
+    <span class="string">"two"</span>: <span class="string">"2.x"</span>,
+    <span class="string">"thr"</span>: <span class="string">"3.3.x"</span>
+  }
+}</code></pre>
+<h4>Tilde Version Ranges</h4>
+<p>A range specifier starting with a tilde <code>~</code> character is matched against a version in the following fashion.</p>
+<ul>
+<li>The version must be at least as high as the range.</li>
+<li>The version must be less than the next major revision above the range.</li>
+</ul>
+<p>For example, the following are equivalent:</p>
+<ul>
+<li><code>&quot;~1.2.3&quot; = &quot;&gt;=1.2.3 &lt;1.3.0&quot;</code></li>
+<li><code>&quot;~1.2&quot; = &quot;&gt;=1.2.0 &lt;2.0.0&quot;</code></li>
+<li><code>&quot;~1&quot; = &quot;&gt;=1.0.0 &lt;2.0.0&quot;</code></li>
+</ul>
+<h4>X Version Ranges</h4>
+<p>An &quot;x&quot; in a version range specifies that the version number must start with the supplied digits, but any digit may be used in place of the x.</p>
+<p>The following are equivalent:</p>
+<ul>
+<li><code>&quot;1.2.x&quot; = &quot;&gt;=1.2.0 &lt;1.3.0&quot;</code></li>
+<li><code>&quot;1.x.x&quot; = &quot;&gt;=1.0.0 &lt;2.0.0&quot;</code></li>
+<li><code>&quot;1.2&quot; = &quot;1.2.x&quot;</code></li>
+<li><code>&quot;1.x&quot; = &quot;1.x.x&quot;</code></li>
+<li><code>&quot;1&quot; = &quot;1.x.x&quot;</code></li>
+</ul>
+<p>You may not supply a comparator with a version containing an x. Any digits after the first &quot;x&quot; are ignored.</p>
+<p><hr>
+<a name="properties/runlist"></a></p>
+<h3>runlist</h3>
+<p>The key difference between language package managers like <code>npm</code> and OS package managers like <code>apt</code> is that <strong>order matters.</strong> The runlist property (similar to Chef) specifies the order in which <code>dependencies</code> should be installed.</p>
+<p>It should be an array of keys in the <code>dependencies</code> property:</p>
+<pre><code class="lang-js">{
+  <span class="string">"dependencies"</span>: {
+    <span class="string">"redis"</span>: <span class="string">"1.0.0"</span>,
+    <span class="string">"ubuntu-base"</span>: <span class="string">"1.0.0"</span>
+  },
+  <span class="string">"runlist"</span>: [<span class="string">"ubuntu-base"</span>, <span class="string">"redis"</span>]
+}</code></pre>
+<h4>Implicit runlists</h4>
+<p>No <code>runlist</code> property is necessary in the case when your system only has one dependency. In this case the <code>runlist</code> is implicit to be only that single dependency.</p>
+<p><hr>
+<a name="properties/os"></a></p>
+<h3>os</h3>
+<p><hr>
+<a name="properties/config"></a></p>
+<h3>config</h3>
+<p>A &quot;config&quot; hash can be used to set configuration parameters used in system scripts that persist across upgrades. For
+instance, if a package had the following:</p>
+<pre><code class="lang-js">{
+  <span class="string">"name"</span>: <span class="string">"foo"</span>,
+  <span class="string">"config"</span> : { <span class="string">"port"</span>: <span class="string">"8080"</span> }
+}</code></pre>
+<p>and then had a &quot;start&quot; command that then referenced the <code>npm_system_config_port</code> environment variable, then the user could override that by doing <code>npm config set foo:port 8001</code>.</p>
+<p><hr>
+<a name="properties/keywords"></a></p>
+<h3>keywords</h3>
+<p>Put keywords in it. It&#39;s an array of strings. This helps people discover your system.</p>
+<p><hr>
+<a name="properties/homepage"></a></p>
+<h3>homepage</h3>
+<p>The url to the project homepage.</p>
+<p><hr>
+<a name="properties/bugs"></a></p>
+<h3>bugs</h3>
+<p>The url to your project&#39;s issue tracker and / or the email address to which issues should be reported. These are helpful for people who encounter issues with your system.</p>
+<p>It should look like this:</p>
+<pre><code class="lang-js">{
+  <span class="string">"url"</span>: <span class="string">"http://github.com/owner/project/issues"</span>,
+  <span class="string">"email"</span>: <span class="string">"project@hostname.com"</span>
+}</code></pre>
+<p>You can specify either one or both values. If you want to provide only a url, you can specify the value for &quot;bugs&quot; as a simple string instead of an object.</p>
+<p><hr>
+<a name="properties/people"></a></p>
+<h3>people fields: author, contributors</h3>
+<p>The &quot;author&quot; is one person. &quot;contributors&quot; is an array of people. A &quot;person&quot; is an object with a &quot;name&quot; field and optionally &quot;url&quot; and &quot;email&quot;, like this:</p>
+<pre><code class="lang-js">{
+  <span class="string">"name"</span>: <span class="string">"Barney Rubble"</span>,
+  <span class="string">"email"</span>: <span class="string">"b@rubble.com"</span>,
+  <span class="string">"url"</span>: <span class="string">"http://barnyrubble.tumblr.com/"</span>
+}</code></pre>
+<p>Or you can shorten that all into a single string, and npm will parse it for you:</p>
+<pre><code class="lang-js">{
+  <span class="string">"author"</span>: <span class="string">"Barney Rubble &lt;b@rubb.com&gt; (http://barn.rubb.com/)"</span>
+}</code></pre>
+<p>Both email and url are optional either way.</p>
+<p><hr>
+<a name="properties/repository"></a></p>
+<h3>repository</h3>
+<p>Specify the place where your code lives. This is helpful for people who want to contribute.</p>
+<p>Do it like this:</p>
+<pre><code class="lang-js"><span class="string">"repository"</span>: {
+  <span class="string">"type"</span>: <span class="string">"git"</span>,
+  <span class="string">"url"</span>: <span class="string">"http://github.com/isaacs/npm.git"</span>
+}</code></pre>
+<pre><code class="lang-js"><span class="string">"repository"</span>: {
+  <span class="string">"type"</span>: <span class="string">"svn"</span>,
+  <span class="string">"url"</span>: <span class="string">"http://v8.googlecode.com/svn/trunk/"</span>
+}</code></pre>
+<p>The URL should be a publicly available (perhaps read-only) url that can be handed directly to a VCS program without any modification. It should not be a url to an html project page that you put in your browser. It&#39;s for computers.</p>
+<pre><code>Remarks: Adapted from npm under MIT.</code></pre>
+</div>
+</div></article>
+    </section>
+  </div>
+  <!-- row -->
+
+  <footer class="doormat">
+    <section class="row">
+      <dl class="twocol">
+        <dt>Resources</dt>
+        <dd>
+          <a href="http://legal.nodejitsu.com/privacy">
+            Privacy policy
+          </a>
+        </dd>
+        <dd>
+          <a href="http://legal.nodejitsu.com/terms-of-service">
+            Terms of Service
+          </a>
+        </dd>
+      </dl>
+      <dl class="newsletter twocol right">
+        <dt>Stay connected</dt>
+        <dd>
+          <ul class="social">
+            <li>
+              <a href="https://twitter.com/nodejitsu" class="ss-twitter ss-social-circle" title="Follow @nodejitsu on Twitter"></a>
+            </li>
+            <li>
+              <a href="https://github.com/nodejitsu" class="ss-octocat ss-social-circle" title="Fork @nodejitsu on Github"></a>
+            </li>
+            <li class="copyright right">&copy; Nodejitsu Inc.</li>
+          </ul>
+        </dd>
+      </dl>
+
+    </section>
+  </footer>
+  <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  <script>
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

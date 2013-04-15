@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var path = require('path');
+    
+var argv = require('optimist')
+  .default('auth', true)
+  .argv;
+
+
+var port = process.env.PORT || process.env.C9_PORT || 8080;
+
+var server = require('http-server').createServer({
+  root: './public/',
+  ext: 'html'
+});
+
+server.listen(process.env.PORT || process.env.C9_PORT || 8080, function () {
+  console.log('Starting up http-server, serving '
+    + server.root
+    + ' on port: '
+    + port);
+  console.log('Hit CTRL-C to stop the server');
+});
+
+process.on('SIGINT', function() {
+  console.log('http-server stopped.');
+  return process.exit();
+});

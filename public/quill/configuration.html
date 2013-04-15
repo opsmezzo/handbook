@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+
+  <title>The Nodejitsu Handbook</title>
+
+  <meta name="description" content="The Nodejitsu Handbook - A gentle introduction to the art of Nodejitsu" />
+  <meta name="author" content="Nodejitsu Inc" />
+  <meta name="viewport" content="width=device-width" />
+
+  <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
+  <link rel="stylesheet" href="/css/monokai.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+
+<body class="container">
+  <section id="navigation" class="navigation">
+    <nav class="row">
+      <h1>
+        <a href="/" class="logo" title="Back to the homepage">Nodejitsu</a>
+      </h1>
+      <a href="#navigation" class="mobile btn ss-rows"></a>
+      <a href="https://www.nodejitsu.com" class=" login right btn" title="Back to nodejitsu.com">
+        <s class="ss-home" role="presentation"></s>
+        home
+      </a>
+    </nav>
+  </section>
+  <div class="faux-columns">
+    <section class="documentation row">
+      <aside class="sidebar twocol" role="complementary">
+        <div id="toc">
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/quill" class="title">Using quill</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/aliases" class="title">Common Aliases</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/config" class="title">Quill configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/updating-systems" class="title">Updating systems</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/system-json" class="title">Working with system.json</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/examples" class="title">Examples</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/templating" class="title">system-json/templating</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/reference" class="title">system.json Reference</a>
+    </span>
+  </span>
+</div>
+</div>
+      </aside>
+
+      <article class="column tencol last" id="content" role="main"><div>
+  <div class="page-details">
+    <h1 class="title">Configuration management</h1>
+  </div>
+  <div class="content"><p><code>quill</code> can be used to perform configuration management tasks and used with <code>baton</code> when bootstrapping servers. <em>Configuration management</em> refers to configuring a single system running on a remote server.</p>
+<ul>
+<li><a href="#managing">Managing configuration from quill</a></li>
+<li><a href="#baton-quill">baton and quill interaction</a></li>
+<li><a href="#scripts-files">Using configuration in system.json files and scripts</a></li>
+</ul>
+<p><hr>
+<a name="managing"></a></p>
+<h2>Managing configuration from <code>quill</code></h2>
+<p>Remote configuration can be managed from <code>quill</code> using <code>remote</code> resource:</p>
+<pre><code class="lang-bash">  quill remote &lt;command&gt;</code></pre>
+<p>To get started you&#39;ll want to create a remote named configuration:</p>
+<pre><code class="lang-bash">  quill remote load /path/to/config-file.json</code></pre>
+<p>Where <code>config-file.json</code> contains all of the nested configuration keys and values:</p>
+<pre><code class="lang-js">  {
+    database: {
+      host: <span class="string">'couch.internal.net'</span>,
+      port: <span class="number">5984</span>,
+      auth: {
+        username: <span class="string">'user'</span>,
+        password: <span class="string">'pass'</span>
+    },
+    value: <span class="number">42</span>
+  }</code></pre>
+<p>You can more granularly manipulate remote configurations through <a href="/quill/resources/remote"><strong><em>quill remote</em></strong> commands</a>.</p>
+<h3>Specifying configuration during a <em>lifecycle-action</em></h3>
+<p>Config can be specified when running each action separately. There are two ways, both of which use the <code>--config</code> option when running <code>quill &lt;lifecycle-action&gt;</code>:</p>
+<pre><code>  quill --config &lt;key&gt;=&lt;value&gt; &lt;lifecycle-action&gt;</code></pre>
+<p>which simply sets <code>&lt;key&gt;</code> to <code>&lt;value&gt;</code>, and</p>
+<pre><code>  quill --config &lt;name&gt; &lt;lifecycle-action&gt;</code></pre>
+<p>which loads config called <code>&lt;name&gt;</code> from the <a href="/conservatory/composer">composer</a>.</p>
+<p><hr>
+<a name="baton-quill"></a></p>
+<h2><code>baton</code> and <code>quill</code> interaction</h2>
+<p>When bootstrapping a server, <code>baton</code> executes <code>quill</code> on the remote machine, using <code>--config</code> parameters to load configurations for group, role and system from provisioner. e.g.</p>
+<pre><code>  baton servers create --config highest-priority-config-to-use [...]</code></pre>
+<p><hr>
+<a name="scripts-files"></a></p>
+<h2>Using configuration in system.json files and scripts</h2>
+<p>For the purposes of configuring systems during a given <em>lifecycle-action</em>, <code>quill</code> supports two ways of injecting config values into files and scripts.</p>
+<ul>
+<li><a href="/system-json/configuration#scripts">Setting environment variables in system.json scripts</a></li>
+<li><a href="/system-json/configuration#files">Templating system.json files</a></li>
+</ul>
+</div>
+</div></article>
+    </section>
+  </div>
+  <!-- row -->
+
+  <footer class="doormat">
+    <section class="row">
+      <dl class="twocol">
+        <dt>Resources</dt>
+        <dd>
+          <a href="http://legal.nodejitsu.com/privacy">
+            Privacy policy
+          </a>
+        </dd>
+        <dd>
+          <a href="http://legal.nodejitsu.com/terms-of-service">
+            Terms of Service
+          </a>
+        </dd>
+      </dl>
+      <dl class="newsletter twocol right">
+        <dt>Stay connected</dt>
+        <dd>
+          <ul class="social">
+            <li>
+              <a href="https://twitter.com/nodejitsu" class="ss-twitter ss-social-circle" title="Follow @nodejitsu on Twitter"></a>
+            </li>
+            <li>
+              <a href="https://github.com/nodejitsu" class="ss-octocat ss-social-circle" title="Fork @nodejitsu on Github"></a>
+            </li>
+            <li class="copyright right">&copy; Nodejitsu Inc.</li>
+          </ul>
+        </dd>
+      </dl>
+
+    </section>
+  </footer>
+  <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  <script>
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

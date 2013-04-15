@@ -1,0 +1,23 @@
+{
+  "name": "handbook",
+  "subdomain": "opsmezzo",
+  "version": "1.0.0",
+  "description": "All documentation about OpsMezzo",
+  "main": "bin/server",
+  "scripts": {
+    "start": "bin/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/opsmezzo/handbook"
+  },
+  "dependencies": {
+    "http-server": "~0.5.3",
+    "optimist": "~0.3.5"
+  },
+  "author": "info@nodejitsu.com",
+  "license": "MIT",
+  "engines": {
+    "node": "0.8.x"
+  }
+}
