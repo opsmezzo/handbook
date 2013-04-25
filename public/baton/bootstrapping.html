@@ -135,52 +135,36 @@
 
       <article class="column tencol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">Configuration management</h1>
+    <h1 class="title">Bootstrapping Servers</h1>
   </div>
-  <div class="content"><p><code>quill</code> can be used to perform configuration management tasks and used with <code>baton</code> when bootstrapping servers. <em>Configuration management</em> refers to configuring a single system running on a remote server.</p>
-<ul>
-<li><a href="#managing">Managing configuration from quill</a></li>
-<li><a href="#baton-quill">baton and quill interaction</a></li>
-<li><a href="#scripts-files">Using configuration in system.json files and scripts</a></li>
-</ul>
-<p><hr>
-<a name="managing"></a></p>
-<h2>Managing configuration from <code>quill</code></h2>
-<p>Remote configuration can be managed from <code>quill</code> using <code>remote</code> resource:</p>
-<pre><code class="lang-bash">  quill remote &lt;command&gt;</code></pre>
-<p>To get started you&#39;ll want to create a remote named configuration:</p>
-<pre><code class="lang-bash">  quill remote load /path/to/config-file.json</code></pre>
-<p>Where <code>config-file.json</code> contains all of the nested configuration keys and values:</p>
-<pre><code class="lang-js">  {
-    database: {
-      host: <span class="string">'couch.internal.net'</span>,
-      port: <span class="number">5984</span>,
-      auth: {
-        username: <span class="string">'user'</span>,
-        password: <span class="string">'pass'</span>
-    },
-    value: <span class="number">42</span>
-  }</code></pre>
-<p>You can more granularly manipulate remote configurations through <a href="/quill/resources/remote"><strong><em>quill remote</em></strong> commands</a>.</p>
-<h3>Specifying configuration during a <em>lifecycle-action</em></h3>
-<p>Config can be specified when running each action separately. There are two ways, both of which use the <code>--config</code> option when running <code>quill &lt;lifecycle-action&gt;</code>:</p>
-<pre><code>  quill --config &lt;key&gt;=&lt;value&gt; &lt;lifecycle-action&gt;</code></pre>
-<p>which simply sets <code>&lt;key&gt;</code> to <code>&lt;value&gt;</code>, and</p>
-<pre><code>  quill --config &lt;name&gt; &lt;lifecycle-action&gt;</code></pre>
-<p>which loads config called <code>&lt;name&gt;</code> from the <a href="/conservatory/composer">composer</a>.</p>
-<p><hr>
-<a name="baton-quill"></a></p>
-<h2><code>baton</code> and <code>quill</code> interaction</h2>
-<p>When bootstrapping a server, <code>baton</code> executes <code>quill</code> on the remote machine, using <code>--config</code> parameters to load configurations for group, role and system from provisioner. e.g.</p>
-<pre><code>  baton servers create --config highest-priority-config-to-use [...]</code></pre>
-<p><hr>
-<a name="scripts-files"></a></p>
-<h2>Using configuration in system.json files and scripts</h2>
-<p>For the purposes of configuring systems during a given <em>lifecycle-action</em>, <code>quill</code> supports two ways of injecting config values into files and scripts.</p>
-<ul>
-<li><a href="/system-json/configuration#scripts">Setting environment variables in system.json scripts</a></li>
-<li><a href="/system-json/configuration#files">Templating system.json files</a></li>
-</ul>
+  <div class="content"><p>&quot;Bootstrapping&quot; a server refers to:</p>
+<ol>
+<li>Installing <code>quill</code>, dependent, and os specific systems.</li>
+<li>Installing (but not applying configuration or starting services) all systems for a given role.   </li>
+</ol>
+<p>Servers are created and/or bootstrapped in <code>baton</code> via <code>baton servers create*</code>. Each of these commands creates a server within a group for a single IaaS provider.</p>
+<p><img src="/img/baton-bootstrapping.png" /></p>
+<h2>Common options</h2>
+<pre><code>  --name       Server name
+  --flavor-id  Size of the server (e.g. 256MB RAM)
+  --image-id   Image to use on the server (e.g. Ubuntu 11.10)
+  --group      Group name server will be placed into</code></pre>
+<h2>baton servers createimage</h2>
+<p>Creates and bootstraps a server: <code>quill</code> and dependent systems are installed to the new VM via <code>scp</code> and <code>ssh</code>. <em>No configuration is applied</em></p>
+<p><strong>Options</strong></p>
+<pre><code>  --role  Role of the server created</code></pre>
+<h2>baton servers create</h2>
+<p>Creates a server from a bootstrapped image (see: <code>baton servers createimage</code>). No files are directly copied, but any systems for the <code>role</code> provided are <em>installed, configured, and started</em></p>
+<pre><code>  --role    Role of the server created
+  --prepare Bootstraps the server without relying on image being bootstrapped</code></pre>
+<h2>baton servers createbatch</h2>
+<p>Executes <code>baton servers create</code> multiple times.</p>
+<p>Creates a given number of servers from a bootstrapped image (see: <code>baton servers createimage</code>). No files are directly copied, but any systems for the <code>role</code> provided are <em>installed, configured, and started</em></p>
+<pre><code>  --role         Role of the server created
+  --batch-size   Number of servers to create concurrently
+  --batch-length Total number of servers to create</code></pre>
+<h2>baton servers createraw</h2>
+<p>Creates a server with no additional files or script executions: plain &#39;ol vanilla server image. </p>
 </div>
 </div></article>
     </section>

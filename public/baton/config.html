@@ -135,51 +135,141 @@
 
       <article class="column tencol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">Configuration management</h1>
+    <h1 class="title">Baton configuration</h1>
   </div>
-  <div class="content"><p><code>quill</code> can be used to perform configuration management tasks and used with <code>baton</code> when bootstrapping servers. <em>Configuration management</em> refers to configuring a single system running on a remote server.</p>
+  <div class="content"><p>There are various local configuration values that you should be aware of when working with <code>baton</code>.</p>
+<hr />
+
+<h2>Available commands</h2>
+<p>Working with local config in <code>baton</code> is just like working with local config in <code>quill</code> or <code>jitsu</code> and is provided by [flatiron-cli-config][flatiron-cli-config].</p>
+<pre><code>baton conf
+baton config list
+baton config set &lt;key&gt; &lt;value&gt;
+baton config get &lt;key&gt;
+baton config delete &lt;key&gt;</code></pre>
+<p>To view all of the local configuration you can run <code>baton conf</code></p>
+<pre><code>  $ baton conf
+  info:    Welcome to baton
+  info:    It worked if it ends with baton ok
+  info:    Executing command conf
+  help:    Hello indexzero here is your /Users/charlie/.batonconf file:
+  help:    If you&#39;d like to change a property try:
+  help:    baton config set &lt;key&gt; &lt;value&gt;
+  data:    
+  data:    {
+  data:        userconfig: &#39;/Users/Charlie/.batonconf&#39;,
+  data:        password: &#39;********&#39;
+  data:        directories: {
+  data:            config: &#39;/Users/Charlie/.baton&#39;,
+  data:            tmp: &#39;/Users/Charlie/.baton/tmp&#39;,
+  data:            keys: &#39;/Users/Charlie/.ssh&#39;,
+  data:            env: &#39;/Users/Charlie/.baton/env&#39;,
+  data:            bootstrap: &#39;/Users/Charlie/.baton/bootstrap&#39;
+  data:        },
+  data:        composer: { host: &#39;ip.of.your.composer&#39;, port: &#39;9003&#39; },
+  data:        username: &#39;indexzero&#39;,
+  data:        remoteHost: &#39;ip.of.your.conservatory&#39;,
+  data:        port: 9003,
+  data:        bootstrap: { runOnError: true }
+  data:    }
+  data:    
+  info:    baton ok</code></pre>
+<hr />
+
+<h2>Config Settings</h2>
+<h3>colors</h3>
 <ul>
-<li><a href="#managing">Managing configuration from quill</a></li>
-<li><a href="#baton-quill">baton and quill interaction</a></li>
-<li><a href="#scripts-files">Using configuration in system.json files and scripts</a></li>
+<li>Default: <code>true</code></li>
+<li>Type: Boolean</li>
 </ul>
-<p><hr>
-<a name="managing"></a></p>
-<h2>Managing configuration from <code>quill</code></h2>
-<p>Remote configuration can be managed from <code>quill</code> using <code>remote</code> resource:</p>
-<pre><code class="lang-bash">  quill remote &lt;command&gt;</code></pre>
-<p>To get started you&#39;ll want to create a remote named configuration:</p>
-<pre><code class="lang-bash">  quill remote load /path/to/config-file.json</code></pre>
-<p>Where <code>config-file.json</code> contains all of the nested configuration keys and values:</p>
-<pre><code class="lang-js">  {
-    database: {
-      host: <span class="string">'couch.internal.net'</span>,
-      port: <span class="number">5984</span>,
-      auth: {
-        username: <span class="string">'user'</span>,
-        password: <span class="string">'pass'</span>
-    },
-    value: <span class="number">42</span>
-  }</code></pre>
-<p>You can more granularly manipulate remote configurations through <a href="/quill/resources/remote"><strong><em>quill remote</em></strong> commands</a>.</p>
-<h3>Specifying configuration during a <em>lifecycle-action</em></h3>
-<p>Config can be specified when running each action separately. There are two ways, both of which use the <code>--config</code> option when running <code>quill &lt;lifecycle-action&gt;</code>:</p>
-<pre><code>  quill --config &lt;key&gt;=&lt;value&gt; &lt;lifecycle-action&gt;</code></pre>
-<p>which simply sets <code>&lt;key&gt;</code> to <code>&lt;value&gt;</code>, and</p>
-<pre><code>  quill --config &lt;name&gt; &lt;lifecycle-action&gt;</code></pre>
-<p>which loads config called <code>&lt;name&gt;</code> from the <a href="/conservatory/composer">composer</a>.</p>
-<p><hr>
-<a name="baton-quill"></a></p>
-<h2><code>baton</code> and <code>quill</code> interaction</h2>
-<p>When bootstrapping a server, <code>baton</code> executes <code>quill</code> on the remote machine, using <code>--config</code> parameters to load configurations for group, role and system from provisioner. e.g.</p>
-<pre><code>  baton servers create --config highest-priority-config-to-use [...]</code></pre>
-<p><hr>
-<a name="scripts-files"></a></p>
-<h2>Using configuration in system.json files and scripts</h2>
-<p>For the purposes of configuring systems during a given <em>lifecycle-action</em>, <code>quill</code> supports two ways of injecting config values into files and scripts.</p>
+<p>Show colored output</p>
+<h3>concurrency</h3>
 <ul>
-<li><a href="/system-json/configuration#scripts">Setting environment variables in system.json scripts</a></li>
-<li><a href="/system-json/configuration#files">Templating system.json files</a></li>
+<li>Default: 75</li>
+<li>Type: Number</li>
+</ul>
+<p>The concurrency with which to run SSH on servers</p>
+<h3>remoteHost</h3>
+<ul>
+<li>Default: localhost</li>
+<li>Type: String</li>
+</ul>
+<p>The provisioner API endpoint</p>
+<h3>port</h3>
+<ul>
+<li>Default: 9003</li>
+<li>Type: Number</li>
+</ul>
+<p>The port of the provisioner API endpoint</p>
+<h3>username</h3>
+<ul>
+<li>Default: None</li>
+<li>Type: String</li>
+</ul>
+<p>The username to connect to provisioner</p>
+<h3>password</h3>
+<ul>
+<li>Default: None</li>
+<li>Type: String</li>
+</ul>
+<p>The password to connect to provisioner</p>
+<h3>tunnel</h3>
+<ul>
+<li>Default: None</li>
+<li>Type: String</li>
+</ul>
+<p>The SSH tunnel to connect to the servers</p>
+<h3>debug</h3>
+<ul>
+<li>Default: true</li>
+<li>Type: Boolean</li>
+</ul>
+<p>Enable Debug logging</p>
+<h3>keyname</h3>
+<ul>
+<li>Default: <code>id_rsa</code></li>
+<li>Type: String</li>
+</ul>
+<p>Name of the default private key to use for SSH connections.</p>
+<h3>userconfig</h3>
+<ul>
+<li>Default: &#39;.batonconfig&#39;</li>
+<li>Type: String</li>
+</ul>
+<p>The user configuration file</p>
+<h3>composer</h3>
+<p>When bootstrapping servers, <code>baton</code> requires a valid composer server.</p>
+<ul>
+<li><strong>composer:host</strong> <em>(Default: None)</em> Remote host of the composer server.</li>
+<li><strong>composer:port</strong> <em>(Default: 9003)</em> Port of the remote composer server.</li>
+</ul>
+<h3>ssl</h3>
+<ul>
+<li><strong>ssl:cert</strong> <em>(Default: None)</em> Location of the client SSL certificate to use when making requests to the remote <code>conservatory</code> or <code>composer</code> servers.</li>
+<li><strong>ssl:key</strong> <em>(Default: None)</em> Location of the client SSL key to use when making requests to the remote <code>conservatory</code> or <code>composer</code> servers.</li>
+</ul>
+<h3>bootstrap</h3>
+<p>When bootstrapping servers there are several configuration values available to you</p>
+<ul>
+<li><strong>bootstrap:runOnError</strong> <em>(Default <code>false</code>)</em> 
+If set to <code>true</code> will not delete a given server if there is an error when bootstrapping.</li>
+<li><strong>bootstrap:user</strong> <em>(Default: varies by provider)</em>
+Remote user to use when SSHing into servers to bootstrap them.</li>
+<li><strong>bootstrap:keys</strong> <em>(Default <code>~/.ssh/id_rsa</code>)</em>
+Location of the SSH keys to use when bootstrapping servers</li>
+<li><strong>bootstrap:poll:interval</strong> <em>(Default: <code>30000</code>)</em>
+Interval to use when polling to get an active SSH connection during the bootstrap process.</li>
+<li><strong>bootstrap:poll:max</strong> <em>(Default: <code>10</code>)</em>
+Number of SSH polling attempts to make before marking a bootstrapped server as errored.</li>
+</ul>
+<h3>directories</h3>
+<p>The directories used to store/retrieve extra configuration</p>
+<ul>
+<li><strong>directories:keys</strong> <em>(Default: <code>~/.ssh</code>)</em></li>
+<li><strong>directories:config</strong> <em>(Default: <code>~/.baton</code>)</em></li>
+<li><strong>directories:bootstrap</strong> <em>(Default: <code>~/.baton/bootstrap</code>)</em></li>
+<li><strong>directories:env</strong> <em>(Default: <code>~/.baton/env</code>)</em></li>
+<li><strong>directories:tmp</strong> <em>(Default: <code>~/.baton/tmp</code>)</em></li>
 </ul>
 </div>
 </div></article>
