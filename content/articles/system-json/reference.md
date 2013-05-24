@@ -6,6 +6,7 @@ A lot of the behavior described in this document is affected by the config setti
 * [`version`](#properties/version)
 * [`description`](#properties/description)
 * [`dependencies`](#properties/dependencies)
+* [`remoteDependencies`](#properties/remoteDependencies)
 * [`runlist`](#properties/runlist)
 * [`os`](#properties/os)
 * [`config`](#properties/config)
@@ -147,6 +148,11 @@ No `runlist` property is necessary in the case when your system only has one dep
 ### os
 
 
+<hr>
+<a name="properties/remoteDependencies"></a>
+### remoteDependencies
+Remote dependencies are specified with a simple hash of system name to version range. The version range is EITHER a string which has one or morespace-separated descriptors, OR a range like "fromVersion - toVersion". They specify systems running on remote servers.
+Detailed description of remote dependencies is available [here](/system-json/remote-dependencies).
 
 <hr>
 <a name="properties/config"></a>
