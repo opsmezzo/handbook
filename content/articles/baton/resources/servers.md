@@ -4,9 +4,25 @@ Servers can be managed from `baton` using `servers` resource:
   baton servers <command>
 ```
 
+Help for `baton servers` commands can be found by running `baton help servers`:
+
+```
+$ baton help servers
+info:    Welcome to baton
+info:    It worked if it ends with baton ok
+info:    Executing command help servers
+help:    `baton servers *` commands work with raw and managed server resources
+(...)
+```
+
 #### Learn more
 
- * [Bootstraping Servers](/baton/bootstrapping)
+* [Creating Servers](#creating-servers)
+* [Bootstraping Servers](/baton/bootstrapping)
+
+<hr/>
+
+## Creating servers
 
 ### `baton servers create`
 
@@ -22,15 +38,27 @@ Creates an image server in the target environment with the name and role specifi
 
 Creates a raw server (i.e. no pre-installed systems) with the image and flavor provided by prompt or arguments.
 
-`--name`       Server name
+``` bash
+--name       Server name
+--group      Group server belongs to
+--image-id   Server Image Id
+--flavor-id  Server Flavor Id
+--insert     Forces insertion of raw server into Conservatory
+```
 
-`--group`      Group server belongs to
+<hr/>
 
-`--image-id`   Server Image Id
+## Destroy Servers
 
-`--flavor-id`  Server Flavor Id
+### `baton servers delete <id>`
 
-`--insert`     Forces insertion of raw server into Conservatory
+Delete a server from the specified environment
+
+`--ignoredb`   ignore errors when deleting the server from CouchDB
+
+<hr/>
+
+## Run commands on Servers
 
 ### `baton servers bootstrap`
 
@@ -39,6 +67,10 @@ Bootstraps a server with all of quill's dependencies
 ### `baton servers run`
 
 Runs the commands specified on all servers with the target role in target environment
+
+<hr/>
+
+## Query Servers
 
 ### `baton servers listraw`
 
@@ -55,11 +87,5 @@ Views the details for the server with the specified `id`
 ### `baton servers rename <id> <name>`
 
 Renames a server with given `id
-
-### `baton servers delete <id>`
-
-Delete a server from the specified environment
-
-`--ignoredb`   ignore errors when deleting the server from CouchDB
 
 [meta:title]: <> (servers: Servers management)
