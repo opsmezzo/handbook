@@ -1,8 +1,7 @@
 /*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
+ * github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+ * 
+ */
 
 pre, code {
   background: #f8f8ff;
@@ -12,6 +11,7 @@ h1 code { font-size: 24px; }
 h2 code { font-size: 22px; }
 h3 code { font-size: 18px; }
 h4 code { font-size: 16px; }
+h3[id]  { color: #444; }
 
 pre code {
   display: block; padding: 0.5em;
