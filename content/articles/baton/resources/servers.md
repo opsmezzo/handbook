@@ -17,12 +17,15 @@ help:    `baton servers *` commands work with raw and managed server resources
 
 #### Learn more
 
-* [Creating Servers](#creating-servers)
+* [Create Servers](#create-servers)
 * [Bootstraping Servers](/baton/bootstrapping)
+* [Destroy Servers](#destroy-servers)
+* [Run commands on Servers](#run-commands-on-servers)
+* [Query Servers](#query-servers)
 
 <hr/>
 
-## Creating servers
+## Create servers
 
 ### `baton servers create`
 

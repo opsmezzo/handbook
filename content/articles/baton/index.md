@@ -2,7 +2,8 @@
 
 ![Baton screenshot](/img/screenshots/baton.png)
 
-<hr>
+<hr/>
+
 ### Learn more
 
 * [Basic Usage](#usage)
@@ -11,7 +12,8 @@
 * [SSH Keys](/baton/ssh-keys)
 * [Resources](/baton/resources)
 
-<hr>
+<hr/>
+
 <a name="usage"></a>
 ## Basic Usage
 
