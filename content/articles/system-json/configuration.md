@@ -200,6 +200,7 @@ will be turned into:
 
 When a [system.json](/system-json) package has [remoteDependencies](/system-json/remote-dependencies), the information about servers which satisfy them is available for both `/scripts` and `/templates`.
 
+For more information on [remoteDependencies](/system-json/remote-dependencies), see the [full article on them.](/system-json/remote-dependencies)
 
 
 [meta:title]: <> (Configuration management)
