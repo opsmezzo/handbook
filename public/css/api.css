@@ -1,0 +1,22 @@
+/*
+ * api.css: CSS for RESTful API references
+ * 
+ */
+
+table {
+  border-bottom: 1px solid #eaeaea;
+}
+
+thead tr {
+  background-color: #F5E9D3;
+  font-size: 16px;
+}
+
+table tr td, table tr td code {
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+table tr td:first-child { min-width: 200px; }
+table.long-api tr td:first-child { width: 290px; }
+
