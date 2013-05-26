@@ -1,5 +1,5 @@
 _If you haven't already installed [baton and quill](/a-quickstart/installation) you should **do so now before continuing.**_
-<hr/>
+<hr>
 
 Both [`baton`][baton] and [`quill`][quill] use similar conventions to [`jitsu`][jitsu], the CLI tool for the Nodejitsu public cloud. So if you're familiar with [`jitsu`][jitsu], _you can probably skip this._
 
@@ -7,7 +7,7 @@ Both [`baton`][baton] and [`quill`][quill] use similar conventions to [`jitsu`][
 * [Common Aliases](#aliases)
 * [Prompts and Overrides](#prompts)
 
-<hr/>
+<hr>
 <a name="resources"></a>
 ## CLI Resources
 
@@ -48,7 +48,7 @@ help:   Options:
 
 _**Remark:** The above is equivalent to_ `baton servers --help` _or_ `baton servers -h`.
 
-<hr/>
+<hr>
 <a name="aliases"></a>
 ## Common Aliases
 
@@ -64,7 +64,7 @@ For a list of all aliases for `baton` and `quill` see the links below:
 * [`baton` aliases](/baton/aliases)
 * [`quill` aliases](/quill/aliases)
 
-<hr/>
+<hr>
 <a name="prompts"></a>
 ## Prompts and Overrides
 

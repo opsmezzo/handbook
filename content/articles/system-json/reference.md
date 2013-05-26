@@ -16,7 +16,7 @@ A lot of the behavior described in this document is affected by the config setti
 * [`contributors`](#properties/people), [`author`](#properties/people)
 * [`repository`](#properties/repository)
 
-<hr/>
+<hr>
 <a name="properties/name"></a>
 ### name
 
@@ -31,7 +31,7 @@ The name is what your thing is called. Some tips:
   folder name. Any name with non-url-safe characters will be rejected.
   Also, it can't start with a dot or an underscore.
 
-<hr/>
+<hr>
 <a name="properties/version"></a>
 ### version
 
@@ -46,13 +46,13 @@ Here's how quill's semver implementation deviates from what's on semver.org:
 
 This is a little bit confusing to explain, but matches what you see in practice when people create tags in git like "v1.2.3" and then do "git describe" to generate a patch version.
 
-<hr/>
+<hr>
 <a name="properties/description"></a>
 ### description
 
 Put a description in it. It's a string. This helps people discover your system, as it's listed in `quill list`.
 
-<hr/>
+<hr>
 <a name="properties/dependencies"></a>
 ### dependencies
 
@@ -121,7 +121,7 @@ The following are equivalent:
 
 You may not supply a comparator with a version containing an x. Any digits after the first "x" are ignored.
 
-<hr/>
+<hr>
 <a name="properties/runlist"></a>
 ### runlist
 
@@ -143,18 +143,18 @@ It should be an array of keys in the `dependencies` property:
 
 No `runlist` property is necessary in the case when your system only has one dependency. In this case the `runlist` is implicit to be only that single dependency.
 
-<hr/>
+<hr>
 <a name="properties/os"></a>
 ### os
 
 
-<hr/>
+<hr>
 <a name="properties/remoteDependencies"></a>
 ### remoteDependencies
 Remote dependencies are specified with a simple hash of system name to version range. The version range is EITHER a string which has one or morespace-separated descriptors, OR a range like "fromVersion - toVersion". They specify systems running on remote servers.
 Detailed description of remote dependencies is available [here](/system-json/remote-dependencies).
 
-<hr/>
+<hr>
 <a name="properties/config"></a>
 ### config
 
@@ -170,19 +170,19 @@ instance, if a package had the following:
 
 and then had a "start" command that then referenced the `npm_system_config_port` environment variable, then the user could override that by doing `npm config set foo:port 8001`.
 
-<hr/>
+<hr>
 <a name="properties/keywords"></a>
 ### keywords
 
 Put keywords in it. It's an array of strings. This helps people discover your system.
 
-<hr/>
+<hr>
 <a name="properties/homepage"></a>
 ### homepage
 
 The url to the project homepage.
 
-<hr/>
+<hr>
 <a name="properties/bugs"></a>
 ### bugs
 
@@ -199,7 +199,7 @@ It should look like this:
 
 You can specify either one or both values. If you want to provide only a url, you can specify the value for "bugs" as a simple string instead of an object.
 
-<hr/>
+<hr>
 <a name="properties/people"></a>
 ### people fields: author, contributors
 
@@ -223,7 +223,7 @@ Or you can shorten that all into a single string, and npm will parse it for you:
 
 Both email and url are optional either way.
 
-<hr/>
+<hr>
 <a name="properties/repository"></a>
 ### repository
 

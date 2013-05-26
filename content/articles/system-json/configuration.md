@@ -6,7 +6,7 @@ _Configuration management_ refers to configuring a single system running on a re
   * [Templating system.json files](#files)
 * [Configuration for remoteDependencies](#remote-dependencies)
 
-<hr/>
+<hr>
 <a name="hierarchy"></a>
 ## Configuration hierarchy
 The total configuration available to a system.json package is the combination of several levels of configuration hierarchy. The priority of this hierarchy (from highest priority to lowest) is:
@@ -46,7 +46,7 @@ Default system-specified configuration set on the `system.json` file (e.g. defau
   }
 ```
 
-<hr/>
+<hr>
 <a name="scripts-files"></a>
 ## Using configuration in system.json files and scripts
 For the purposes of configuring systems during a given _lifecycle-action_, `quill` supports two ways of injecting config values into files and scripts.

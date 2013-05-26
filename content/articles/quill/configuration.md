@@ -4,7 +4,7 @@
 * [baton and quill interaction](#baton-quill)
 * [Using configuration in system.json files and scripts](#scripts-files)
 
-<hr/>
+<hr>
 <a name="managing"></a>
 ## Managing configuration from `quill`
 Remote configuration can be managed from `quill` using `remote` resource:
@@ -51,7 +51,7 @@ which simply sets `<key>` to `<value>`, and
 
 which loads config called `<name>` from the [composer](/conservatory/composer).
 
-<hr/>
+<hr>
 <a name="baton-quill"></a>
 ## `baton` and `quill` interaction
 When bootstrapping a server, `baton` executes `quill` on the remote machine, using `--config` parameters to load configurations for group, role and system from provisioner. e.g.
@@ -60,7 +60,7 @@ When bootstrapping a server, `baton` executes `quill` on the remote machine, usi
   baton servers create --config highest-priority-config-to-use [...]
 ```
 
-<hr/>
+<hr>
 <a name="scripts-files"></a>
 ## Using configuration in system.json files and scripts
 For the purposes of configuring systems during a given _lifecycle-action_, `quill` supports two ways of injecting config values into files and scripts.

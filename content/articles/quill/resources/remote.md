@@ -4,7 +4,7 @@ Remote configuration can be managed from `quill` using `remote` resource:
   quill remote <command>
 ```
 
-<hr/>
+<hr>
 
 ## Modifying remote configuration
 
@@ -28,7 +28,7 @@ Set value of `<key>` to `<value>` in remote config named `<name>`.
 ### `quill remote clear <name> <key>`
 Remove key `<key>` from remote config named `<name>`.
 
-<hr/>
+<hr>
 
 ## Viewing remote configuration
 

@@ -25,7 +25,11 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   * [Providers](#providers)
   * [Users](#users)
 
-<hr/>
+<hr>
+
+_There is a [single-page API reference available here.](/api/conservatory/full-reference)_
+
+<hr>
 
 ## Resource Ids
 <table>
@@ -65,7 +69,7 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   </tr>
 </table>
 
-<hr/>
+<hr>
 
 <a name="servers"></a>
 ## Servers
@@ -113,7 +117,7 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   </tr>
 </table>
 
-<hr/>
+<hr>
 
 <a name="clusters"></a>
 ## Clusters
@@ -131,7 +135,7 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   </tr>  
 </table>
 
-<hr/>
+<hr>
 
 <a name="roles"></a>
 ## Roles
@@ -179,7 +183,7 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   </tr>  
 </table>
 
-<hr/>
+<hr>
 
 <a name="groups"></a>
 ## Groups
@@ -218,7 +222,7 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   </tr>
 </table>
 
-<hr/>
+<hr>
 
 ### Servers in Group
 <table>
@@ -249,7 +253,7 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   </tr>
 </table>
 
-<hr/>
+<hr>
 
 <a name="providers"></a>
 ## Providers
@@ -267,7 +271,7 @@ Conservatory exposes a RESTful backend for managing `Servers`, `Roles`, and `Gro
   </tr>  
 </table>
 
-<hr/>
+<hr>
 
 ## Users
 

@@ -19,4 +19,15 @@ table tr td, table tr td code {
 
 table tr td:first-child { min-width: 200px; }
 table.long-api tr td:first-child { width: 290px; }
+table.fullref tr td:nth-child(2) { width: 290px }
+table.fullref tr td:first-child { 
+  background: #f6f6f6;
+  border-bottom: 1px solid #D9D5CC;
+  border-top: 1px solid #D9D5CC;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 50px;
+  text-align: center;
+  width: 50px;
+}
 

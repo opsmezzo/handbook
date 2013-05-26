@@ -23,7 +23,7 @@ help:    `baton servers *` commands work with raw and managed server resources
 * [Run commands on Servers](#run-commands-on-servers)
 * [Query Servers](#query-servers)
 
-<hr/>
+<hr>
 
 ## Create servers
 
@@ -49,7 +49,7 @@ Creates a raw server (i.e. no pre-installed systems) with the image and flavor p
 --insert     Forces insertion of raw server into Conservatory
 ```
 
-<hr/>
+<hr>
 
 ## Destroy Servers
 
@@ -59,7 +59,7 @@ Delete a server from the specified environment
 
 `--ignoredb`   ignore errors when deleting the server from CouchDB
 
-<hr/>
+<hr>
 
 ## Run commands on Servers
 
@@ -71,7 +71,7 @@ Bootstraps a server with all of quill's dependencies
 
 Runs the commands specified on all servers with the target role in target environment
 
-<hr/>
+<hr>
 
 ## Query Servers
 

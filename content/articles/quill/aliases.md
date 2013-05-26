@@ -6,7 +6,7 @@
 * `quill update <system>+`
 * `quill uninstall <system>+`
 
-<hr/>
+<hr>
 
 ### Working with Systems
 * `quill publish <system>+`
@@ -14,7 +14,7 @@
 * `quill list`
 * `quill view <system>`
 
-<hr/>
+<hr>
 
 ### System configuration
 * `quill hostname`

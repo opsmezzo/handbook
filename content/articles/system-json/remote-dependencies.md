@@ -2,7 +2,7 @@ Remote dependencies are a way of connecting systems to other systems running on 
 
 For example, OpsMezzo backends, `conservatory` and `composer`, need CouchDB to operate. Thus, systems installing this software will have `couchdb` system in their `remoteDependencies`.
 
-<hr/>
+<hr>
 
 ## Example
 

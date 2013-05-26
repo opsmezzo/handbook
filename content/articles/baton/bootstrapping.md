@@ -7,7 +7,7 @@ Servers are created and/or bootstrapped in `baton` via `baton servers create*`. 
 
 <img src="/img/baton-bootstrapping.png" />
 
-<hr/>
+<hr>
 
 ## Common options
 ```
@@ -17,7 +17,7 @@ Servers are created and/or bootstrapped in `baton` via `baton servers create*`. 
   --group      Group name server will be placed into
 ```
 
-<hr/>
+<hr>
 
 ## baton servers createimage
 
@@ -28,7 +28,7 @@ Creates and bootstraps a server: `quill` and dependent systems are installed to 
   --role  Role of the server created
 ```
 
-<hr/>
+<hr>
 
 ## baton servers create
 
@@ -39,7 +39,7 @@ Creates a server from a bootstrapped image (see: `baton servers createimage`). N
   --prepare Bootstraps the server without relying on image being bootstrapped
 ```
 
-<hr/>
+<hr>
 
 ## baton servers createbatch
 
@@ -53,7 +53,7 @@ Creates a given number of servers from a bootstrapped image (see: `baton servers
   --batch-length Total number of servers to create
 ```
 
-<hr/>
+<hr>
 
 ## baton servers createraw
 

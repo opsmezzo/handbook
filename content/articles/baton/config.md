@@ -1,6 +1,6 @@
 There are various local configuration values that you should be aware of when working with `baton`.
 
-<hr/>
+<hr>
 
 ## Available commands
 
@@ -45,7 +45,7 @@ To view all of the local configuration you can run `baton conf`
   info:    baton ok
 ```
 
-<hr/>
+<hr>
 
 ## Config Settings
 

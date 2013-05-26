@@ -1,4 +1,4 @@
-<hr/>
+<hr>
 
 `system.json` is a _simple and hierarchical_ file format for describing OS-level (and OS agnostic) packages to be installed with [baton][baton] and [quill][quill]. It is based on the widely popular [`package.json`][package-json] specification used with [`node.js`][nodejs] and [`npm`][npm].
 
@@ -12,7 +12,7 @@ To learn more about the `system.json` format consider the material below:
 * [Examples][examples]
 * [Full `system.json` Reference][reference]
 
-<hr/>
+<hr>
 
 <a name="anatomy"></a>
 ## Anatomy of a `system.json`
@@ -52,7 +52,7 @@ Each of the files under `/scripts` represents what to run for each [lifecycle ac
 
 All of the files under `/files` will be templated with any [system configuration][system-config] during the _configure lifecycle action._ This is to allow for reuse of configurable servers images. That is, to prevent the need to create new images each time a configuration setting is changed.
 
-<hr/>
+<hr>
 <a name="changes"></a>
 ## Changes from `package.json`
 
@@ -76,7 +76,7 @@ There are also several npm convenience features which are not implemented but ma
 * Git URLs as Dependencies
 * URLs as Dependencies
 
-<hr/>
+<hr>
 <a name="ignore"></a>
 ## Ignoring files
 

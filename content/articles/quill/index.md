@@ -2,7 +2,7 @@
 
 <img src="/img/screenshots/quill.png" />
 
-<hr/>
+<hr>
 
 ### Learn more
 
@@ -14,7 +14,7 @@
   * [Systems](/quill/resources/systems)
   * [Config](/quill/resources/config)
 
-<hr/>
+<hr>
 
 <a name="usage"></a>
 ## Basic Usage

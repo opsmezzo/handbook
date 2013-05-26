@@ -1,6 +1,6 @@
 There are various local configuration values that you should be aware of when working with `quill`.
 
-<hr/>
+<hr>
 
 ## Available commands
 
@@ -44,7 +44,7 @@ To view all of the local configuration you can run `quill conf`
   info:    quill ok
 ```
 
-<hr/>
+<hr>
 
 ## Config Settings
 
