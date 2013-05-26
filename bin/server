@@ -7,7 +7,7 @@ var argv = require('optimist')
   .argv;
 
 var server = require('http-server').createServer({
-  root: './public/',
+  root: path.join(__dirname, '..', 'public'),
   ext: 'html'
 });
 
