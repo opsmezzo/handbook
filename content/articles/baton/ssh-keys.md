@@ -39,7 +39,6 @@ baton keys sync <username>
 baton keys sync --group <group>
 ```
 
-
 Syncs the keys a given `username` with a given group (i.e. IaaS provider). If no username is provided then all SSH public keys are synced with the specified group.
 
 If no group is specified, then you will be prompted for one.
