@@ -6,7 +6,15 @@
         "toc": {
           "partial": "topic",
           "tree": "article",
-          "truncate": true
+          "truncate": true,
+          "sort": [
+            "faq",
+            "using-conventions",
+            "system-json",
+            "api",
+            "quill",
+            "baton"
+          ]
         }
       }
     },
@@ -15,7 +23,15 @@
         "toc": {
           "partial": "topic",
           "tree": "article",
-          "truncate": true
+          "truncate": true,
+          "sort": [
+            "faq",
+            "using-conventions",
+            "system-json",
+            "api",
+            "quill",
+            "baton"
+          ]
         }
       }
     }
