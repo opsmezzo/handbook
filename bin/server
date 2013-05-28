@@ -6,12 +6,13 @@ var argv = require('optimist')
   .default('auth', true)
   .argv;
 
+var port = process.env.PORT || process.env.C9_PORT || 8080;
 var server = require('http-server').createServer({
   root: path.join(__dirname, '..', 'public'),
   ext: 'html'
 });
 
-server.listen(process.env.PORT || process.env.C9_PORT || 8080, function () {
+server.listen(port, function () {
   console.log('Starting up http-server, serving '
     + server.root
     + ' on port: '
