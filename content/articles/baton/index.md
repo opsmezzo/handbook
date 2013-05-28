@@ -3,6 +3,7 @@
 ![Baton screenshot](/img/screenshots/baton.png)
 
 <hr>
+
 ### Learn more
 
 * [Basic Usage](#usage)
@@ -12,6 +13,7 @@
 * [Resources](/baton/resources)
 
 <hr>
+
 <a name="usage"></a>
 ## Basic Usage
 

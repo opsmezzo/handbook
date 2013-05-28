@@ -1,6 +1,6 @@
 There are various local configuration values that you should be aware of when working with `baton`.
 
-<hr />
+<hr>
 
 ## Available commands
 
@@ -45,7 +45,7 @@ To view all of the local configuration you can run `baton conf`
   info:    baton ok
 ```
 
-<hr />
+<hr>
 
 ## Config Settings
 
@@ -146,4 +146,5 @@ The directories used to store/retrieve extra configuration
 * **directories:env** _(Default: `~/.baton/env`)_
 * **directories:tmp** _(Default: `~/.baton/tmp`)_
 
+[flatiron-cli-config]: https://github.com/flatiron/cli-config
 [meta:title]: <> (Baton configuration)
