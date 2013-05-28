@@ -12,7 +12,9 @@
   <meta name="viewport" content="width=device-width" />
 
   <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
-  <link rel="stylesheet" href="/css/monokai.css">
+  <link rel="stylesheet" href="/css/github.css">
+  <link rel="stylesheet" href="/css/menus.css">
+  <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
     .opsmezzo {
@@ -41,8 +43,87 @@
   </section>
   <div class="faux-columns">
     <section class="documentation row">
-      <aside class="sidebar twocol" role="complementary">
+      <aside class="sidebar threehalfcol" role="complementary">
         <div id="toc">
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/faq" class="title">FAQ</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/using-conventions" class="title">CLI Conventions</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/system-json" class="title">Working with system.json</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/remote-dependencies" class="title">Remote dependencies</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/reference" class="title">system.json Reference</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/quill" class="title">Using quill</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/aliases" class="title">Common Aliases</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/config" class="title">Quill configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/updating-systems" class="title">Updating systems</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/configuration" class="title">Working with configuration</a>
+    </span>
+  </span>
+</div>
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
@@ -62,82 +143,58 @@
     </span>
   </span><span class="tree">
     <span class="page-details">
-      <a href="/baton/aliases" class="title">Common Aliases</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
       <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/faq" class="title">FAQ</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/quill/resources" class="title">CLI Resources</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/quill/aliases" class="title">Common Aliases</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/quill/configuration" class="title">Configuration management</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/quill/config" class="title">Quill configuration</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/quill/updating-systems" class="title">Updating systems</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/system-json" class="title">Working with system.json</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/system-json/configuration" class="title">Configuration management</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/system-json/reference" class="title">system.json Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/using-conventions" class="title">CLI Conventions</a>
     </span>
   </span>
 </div>
 </div>
       </aside>
 
-      <article class="column tencol last" id="content" role="main"><div>
+      <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
     <h1 class="title">Quill configuration</h1>
+    <hr>
   </div>
-  <div class="content"><h3>directories</h3>
+  <div class="content"><p>There are various local configuration values that you should be aware of when working with <code>quill</code>.</p>
+<hr>
+
+<h2>Available commands</h2>
+<p>Working with local config in <code>quill</code> is just like working with local config in <code>baton</code> or <code>jitsu</code> and is provided by <a href="https://github.com/flatiron/cli-config">flatiron-cli-config</a>.</p>
+<pre><code>quill conf
+quill config list
+quill config set &lt;key&gt; &lt;value&gt;
+quill config get &lt;key&gt;
+quill config delete &lt;key&gt;</code></pre>
+<p>To view all of the local configuration you can run <code>quill conf</code></p>
+<pre><code>  $ quill conf
+  info:    Welcome to quill
+  info:    It worked if it ends with quill ok
+  info:    Executing command conf
+  help:    Hello indexzero here is your /Users/charlie/.quillconf file:
+  help:    If you&#39;d like to change a property try:
+  help:    quill config set &lt;key&gt; &lt;value&gt;
+  data:    
+  data:    {
+  data:        userconfig: &#39;/Users/Charlie/.quillconf&#39;,
+  data:        password: &#39;********&#39;
+  data:        directories: {
+  data:            env: &#39;/Users/Charlie/.quill/env&#39;,
+  data:            ssh: &#39;/Users/Charlie/.ssh&#39;,
+  data:            tmp: &#39;/Users/Charlie/.quill/tmp&#39;,
+  data:            cache: &#39;/Users/Charlie/.quill/cache&#39;,
+  data:            root: &#39;/Users/Charlie/.quill&#39;,
+  data:            install: &#39;/Users/Charlie/.quill/installed&#39;
+  data:        },
+  data:        username: &#39;indexzero&#39;,
+  data:        remoteHost: &#39;ip.of.your.composer&#39;,
+  data:        port: 9003
+  data:    }
+  data:    
+  info:    quill ok</code></pre>
+<hr>
+
+<h2>Config Settings</h2>
+<h3>directories</h3>
 <ul>
 <li>ssh</li>
 <li>install</li>
@@ -194,5 +251,7 @@
     hljs.tabReplace = '    ';
     hljs.initHighlightingOnLoad();
   </script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+  <script src="/js/slugify.js"></script>
 </body>
 </html>

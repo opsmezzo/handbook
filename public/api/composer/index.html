@@ -152,12 +152,190 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">FAQ</h1>
+    <h1 class="title">Composer API Reference</h1>
     <hr>
   </div>
-  <div class="content"><h2>How do I use <code>quill</code> or <code>baton</code> behind a proxy?</h2>
-<p>Just set the proxy setting:</p>
-<pre><code>  [baton|quill] config set proxy http://[&lt;auth&gt;@]&lt;host&gt;:&lt;port&gt;</code></pre>
+  <div class="content"><pre><code>  $ bin/composer
+
+       ___  ____  _______ ____  ____  ____  ____  ____
+      /    /   / /  /  / /___/ /   / /___  /___  /___/
+     /___ /___/ /  /  / /     /___/ ____/ /___  /  \
+
+                © 2010 Nodejitsu Inc.
+        All Rights Reserved - www.nodejitsu.com
+
+  composer has started successfully @ 192.168.1.106 on port 9004...</code></pre>
+<p>Composer exposes a RESTful backend for managing <code>Config</code>, and <code>Systems</code>. This is the backend for  <a href="/quill"><code>quill</code></a>.</p>
+<ul>
+<li><a href="#resource-ids">Resource Ids</a></li>
+<li><strong>REST Resources</strong><ul>
+<li><a href="#systems">Systems</a></li>
+<li><a href="#config">Config</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+
+<p><em>There is a <a href="/api/composer/full-reference">single-page API reference available here.</a></em></p>
+<hr>
+
+<h2>Resource Ids</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Resource</th>
+      <th>Id</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>System name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+  <tr>
+    <td>System version</td>
+    <td>Valid <a href="http://semver.org">Semver</a></td>
+  </tr>
+  <tr>
+    <td>Config name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+  <tr>
+    <td>Group name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+  <tr>
+    <td>Cluster name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+</table>
+
+<hr>
+
+<p><a name="systems"></a></p>
+<h2>Systems</h2>
+<h3>Basic Operations</h3>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /systems</code></td>
+    <td>None</td>
+    <td>Returns a list of all systems</td>
+  </tr>
+  <tr>
+    <td><code>GET /systems/:name</code></td>
+    <td>None</td>
+    <td>Returns the informations about the system with <code>name</code></td>
+  </tr>
+  <tr>
+    <td><code>POST /systems/:name</code></td>
+    <td>JSON</td>
+    <td>Creates a new system.</td>
+  </tr>
+  <tr>
+    <td><code>PUT /systems/:name</code></td>
+    <td>JSON</td>
+    <td>Adds a version to the system with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /systems/:name</code></td>
+    <td>None</td>
+    <td>Deletes the corresponding system with <code>name</code></td>
+  </tr>
+</table>
+
+<hr>
+
+<h3>System Owners</h3>
+<table class="long-api">
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>PUT /systems/:name/owners</code></td>
+    <td>Array</td>
+    <td>Adds the array of usernames to the maintainers of the system with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /systems/:name/owners</code></td>
+    <td>Array</td>
+    <td>Removes the array of usernames from the maintainers of the system with <code>name</code>.</td>
+  </tr>
+</table>
+
+<hr>
+
+<h3>System versions</h3>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>DELETE /systems/:name/:version</code></td>
+    <td>None</td>
+    <td>Removes the <code>version</code> for the system with the specified <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>PUT /systems/:name/:version</code></td>
+    <td>Tarball</td>
+    <td>Adds the attached tarball to the <code>name</code> and <code>version</code>.</td>
+  </tr>
+  <tr>
+    <td><code>GET /systems/:name/:version</code></td>
+    <td>None</td>
+    <td>Returns the tarball for the specified <code>name</code> and <code>version</code>.</td>
+  </tr>
+</table>
+
+<hr>
+
+<p><a name="config"></a></p>
+<h2>Config</h2>
+<table class="long-api">
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /config</code></td>
+    <td>None</td>
+    <td>Returns a list of all configs</td>
+  </tr>
+  <tr>
+    <td><code>GET /config/:name</code></td>
+    <td>None</td>
+    <td>Returns details for config with the specified <code>name</code></td>
+  </tr>
+  <tr>
+    <td><code>POST /config/:name</code></td>
+    <td>JSON</td>
+    <td>Creates a new config.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /config/:name</code></td>
+    <td>None</td>
+    <td>Removes the config with the specified <code>name</code></td>
+  </tr>
+  <tr>
+    <td><code>PUT /config/:name/path/to/key</code></td>
+    <td>JSON</td>
+    <td>Sets the JSON body in the settings value of the environment with the specified <code>name</code></td>
+  </tr>
+  <tr>
+    <td><code>DELETE /config/:name/path/to/key</code></td>
+    <td>None</td>
+    <td>Clears the key in the settings value of the environment with the specified <code>name</code></td>
+  </tr>
+</table>
+
 </div>
 </div></article>
     </section>

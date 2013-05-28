@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
   <link rel="stylesheet" href="/css/github.css">
   <link rel="stylesheet" href="/css/menus.css">
-  <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
     .opsmezzo {
@@ -152,12 +151,85 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">FAQ</h1>
+    <h1 class="title">Conservatory API Reference</h1>
     <hr>
   </div>
-  <div class="content"><h2>How do I use <code>quill</code> or <code>baton</code> behind a proxy?</h2>
-<p>Just set the proxy setting:</p>
-<pre><code>  [baton|quill] config set proxy http://[&lt;auth&gt;@]&lt;host&gt;:&lt;port&gt;</code></pre>
+  <div class="content"><pre><code>  $ ./conservatory/bin/provisioner 
+
+
+          ___  ____ _   _  ___  ___  ___ _  __ ____ ____ ____  ___ _  __
+         /    /   / /\  / /__  /_   /__/ |  / /___/  /  /   / /__/ /__/
+        /___ /___/ /  \/ ___/ /__  /  \  |_/ /   /  /  /___/ /  \  /
+
+        © 2010 Nodejitsu Inc.
+        All Rights Reserved - www.nodejitsu.com
+
+
+  conservatory has started successfully as provisioner @ 127.0.0.1 on port 9003...</code></pre>
+<p>Conservatory exposes a RESTful backend for managing <code>Servers</code>, <code>Roles</code>, and <code>Groups</code>, This is the backend for  <a href="/baton"><code>baton</code></a>.</p>
+<p><hr></p>
+<h3>Learn more</h3>
+<ul>
+<li>System management with <a href="/conservatory/composer">Composer</a></li>
+<li>Server management with <a href="/conservatory/provisioner">Provisioner</a></li>
+</ul>
+<p><a name="servers"></a></p>
+<h2>Servers</h2>
+<pre><code>/servers</code></pre>
+<p><strong>GET</strong> Lists all servers in the cluster</p>
+<hr>
+
+<pre><code>/servers/:server-name</code></pre>
+<p><strong>POST</strong> Creates a new server</p>
+<p><strong>GET</strong> Shows the details of <code>server-name</code></p>
+<p><strong>PUT</strong> Updates <code>server-name</code> with valid settings</p>
+<p><strong>DELETE</strong> Deletes <code>server-name</code></p>
+<hr>
+
+<p><a name="roles"></a></p>
+<h2>Roles</h2>
+<pre><code>/roles</code></pre>
+<p><strong>GET</strong> Lists all roles</p>
+<hr>
+
+<pre><code>/roles/:role</code></pre>
+<p><strong>GET</strong> Shows details of the <code>role</code></p>
+<p><strong>POST</strong> Creates a new <code>role</code></p>
+<p><strong>PUT</strong> Updates <code>role</code> with valid properties</p>
+<p><strong>DELETE</strong> Deletes the specified <code>role</code></p>
+<hr>
+
+<pre><code>/roles/:role/:server</code></pre>
+<p><strong>GET</strong> Lists all servers for the specified <code>role</code></p>
+<hr>
+
+<p><a name="providers"></a></p>
+<h2>Providers</h2>
+<pre><code>/providers/:provider/groups/</code></pre>
+<p><strong>GET</strong> Lists all groups for the specified provider</p>
+<hr>
+
+<p><a name="groups"></a></p>
+<h2>Groups</h2>
+<pre><code>/groups</code></pre>
+<p><strong>GET</strong> Lists all groups</p>
+<hr>
+
+<pre><code>/groups/:group</code></pre>
+<p><strong>GET</strong> Shows details for <code>group</code></p>
+<p><strong>POST</strong> Creates new <code>group</code></p>
+<p><strong>PUT</strong> Updates <code>group</code> with valid properties</p>
+<p><strong>DELETE</strong> Deletes <code>group</code></p>
+<hr>
+
+<pre><code>/groups/:group/servers</code></pre>
+<p><strong>GET</strong> Lists all servers for the specified <code>group</code></p>
+<hr>
+
+<pre><code>/groups/:group/servers/:server</code></pre>
+<p><strong>GET</strong> Lists details for the server with IP <code>server</code> in group <code>group</code></p>
+<p><strong>PUT</strong> Updates the specified server </p>
+<p><strong>DELETE</strong> Removes the <code>server</code> in <code>group</code></p>
 </div>
 </div></article>
     </section>

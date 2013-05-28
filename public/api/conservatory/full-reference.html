@@ -152,12 +152,187 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">FAQ</h1>
+    <h1 class="title">Single-page Conservatory API Reference</h1>
     <hr>
   </div>
-  <div class="content"><h2>How do I use <code>quill</code> or <code>baton</code> behind a proxy?</h2>
-<p>Just set the proxy setting:</p>
-<pre><code>  [baton|quill] config set proxy http://[&lt;auth&gt;@]&lt;host&gt;:&lt;port&gt;</code></pre>
+  <div class="content"><pre><code>  $ ./conservatory/bin/provisioner 
+
+
+          ___  ____ _   _  ___  ___  ___ _  __ ____ ____ ____  ___ _  __
+         /    /   / /\  / /__  /_   /__/ |  / /___/  /  /   / /__/ /__/
+        /___ /___/ /  \/ ___/ /__  /  \  |_/ /   /  /  /___/ /  \  /
+
+        © 2010 Nodejitsu Inc.
+        All Rights Reserved - www.nodejitsu.com
+
+
+  conservatory has started successfully as provisioner @ 127.0.0.1 on port 9003...</code></pre>
+<p>Conservatory exposes a RESTful backend for managing <code>Servers</code>, <code>Roles</code>, and <code>Groups</code>. This is the backend for  <a href="/baton"><code>baton</code></a>. <strong>This is all RESTful routes for all resources for this API.</strong></p>
+<hr>
+
+<table class="fullref">
+  <thead>
+    <th>Resource</th>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td>Servers</td>
+    <td><code>GET /servers</code></td>
+    <td>None</td>
+    <td>Returns a list of all servers.</td>
+  </tr>
+  <tr>
+    <td>Servers</td>
+    <td><code>GET /servers/:id</code></td>
+    <td>None</td>
+    <td>Returns the informations about the server with <code>id</code>.</td>
+  </tr>
+  <tr>
+    <td>Servers</td>
+    <td><code>POST /servers/:id</code></td>
+    <td>JSON</td>
+    <td>Adds an existing server to conservatory. <strong>Will not provision from your IaaS provider.</strong></td>
+  </tr>
+  <tr>
+    <td>Servers</td>
+    <td><code>PUT /servers/:id</code></td>
+    <td>JSON</td>
+    <td>Updates the server with the specified <code>id</code>.</td>
+  </tr>
+  <tr>
+    <td>Servers</td>
+    <td><code>DELETE /servers/:id</code></td>
+    <td>None</td>
+    <td>Removes a server from conservatory. <strong>Will not remove the server from your IaaS provider.</strong></td>
+  </tr>
+  <tr>
+    <td>Servers</td>
+    <td><code>POST /servers/tagged</code></td>
+    <td>JSON</td>
+    <td>Returns a list of all servers with the specified <code>body.tags</code>.</td>
+  </tr>
+  <tr>
+    <td>Servers</td>
+    <td><code>POST /servers/uid</code></td>
+    <td>JSON</td>
+    <td>Returns the unique identifier for the server information.</td>
+  </tr>
+  <tr>
+    <td>Clusters</td>
+    <td><code>GET /clusters/:cluster/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers with the specified <code>cluster</code>.</td>
+  </tr><br>  <tr>
+    <td>Roles</td>
+    <td><code>GET /roles</code></td>
+    <td>None</td>
+    <td>Returns a list of all roles.</td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td><code>GET /roles/:name</code></td>
+    <td>None</td>
+    <td>Returns the informations about the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td><code>POST /roles/:name</code></td>
+    <td>JSON</td>
+    <td>Creates a new role.</td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td><code>PUT /roles/:name</code></td>
+    <td>JSON</td>
+    <td>Adds a version to the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td><code>DELETE /roles/:name</code></td>
+    <td>None</td>
+    <td>Deletes the corresponding role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td><code>DELETE /roles/:name/:version</code></td>
+    <td>None</td>
+    <td>Removes the <code>version</code> for the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td><code>GET /roles/:name/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers for the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>GET /groups</code></td>
+    <td>None</td>
+    <td>Returns a list of all groups.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>GET /groups/:name</code></td>
+    <td>None</td>
+    <td>Returns the informations about the group with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>POST /groups/:name</code></td>
+    <td>JSON</td>
+    <td>Creates a new group.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>PUT /groups/:name</code></td>
+    <td>JSON</td>
+    <td>Updates the group with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>DELETE /groups/:name</code></td>
+    <td>None</td>
+    <td>Deletes the corresponding group with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>GET /groups/:name/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers for the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>GET /groups/:name/servers/:id</code></td>
+    <td>None</td>
+    <td>Lists details for the server with IP <code>server</code> in group <code>group</code>.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>PUT /groups/:name/servers/:id</code></td>
+    <td>None</td>
+    <td>Updates the server with <code>id</code> in the group with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td>Groups</td>
+    <td><code>DELETE /groups/:name/servers/:id</code></td>
+    <td>None</td>
+    <td>Removes a server from conservatory. <strong>Will not remove the server from your IaaS provider.</strong></td>
+  </tr>
+  <tr>
+    <td>Providers</td>
+    <td><code>GET /providers/:provider/groups</code></td>
+    <td>None</td>
+    <td>Lists all groups for the specified provider.</td>
+  </tr><br>  <tr>
+    <td>Users</td>
+    <td><code>GET /users/:name/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers created by the user with <code>name</code>.</td>
+  </tr>
+</table>
+
 </div>
 </div></article>
     </section>

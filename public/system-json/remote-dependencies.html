@@ -152,12 +152,57 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">FAQ</h1>
+    <h1 class="title">Remote dependencies</h1>
     <hr>
   </div>
-  <div class="content"><h2>How do I use <code>quill</code> or <code>baton</code> behind a proxy?</h2>
-<p>Just set the proxy setting:</p>
-<pre><code>  [baton|quill] config set proxy http://[&lt;auth&gt;@]&lt;host&gt;:&lt;port&gt;</code></pre>
+  <div class="content"><p>Remote dependencies are a way of connecting systems to other systems running on remote servers. When a <a href="/system-json">system.json</a> package has <a href="/system-json/remote-dependencies">remoteDependencies</a>, the information about servers which satisfy them is available for both <code>/scripts</code> and <code>/templates</code>.</p>
+<p>For example, OpsMezzo backends, <code>conservatory</code> and <code>composer</code>, need CouchDB to operate. Thus, systems installing this software will have <code>couchdb</code> system in their <code>remoteDependencies</code>.</p>
+<hr>
+
+<h2>Example</h2>
+<p>Let&#39;s take a look at the <code>system.json</code> manifest for the <code>composer</code> system:</p>
+<pre><code class="lang-js">{
+  <span class="string">"name"</span>: <span class="string">"composer"</span>,
+  <span class="string">"keywords"</span>: [<span class="string">"configuration management"</span>, <span class="string">"devops"</span>],
+  <span class="string">"author"</span>: <span class="string">"Nodejitsu Inc &lt;info@nodejitsu.com&gt;"</span>,
+  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,
+  <span class="string">"remoteDependencies"</span>: {
+    <span class="string">"couchdb"</span>: <span class="string">"1.0.x"</span>
+  },
+  <span class="string">"dependencies"</span>: {
+    <span class="string">"npm-manager"</span>: <span class="string">"1.0.x"</span>
+  }
+}</code></pre>
+<p>By adding <code>couchdb</code> to the <code>system.json</code> manifest will enable two features for this system:</p>
+<h3>1. Configuration for remoteDependencies is available in <code>/scripts</code> and <code>/templates</code></h3>
+<p>When this system is configured (e.g. using <code>quill configure composer</code>), the configuration for systems which satisfy the <code>remoteDependencies</code> will be available. The <code>composer</code> system takes advantage of this in it&#39;s templates:</p>
+<p><strong>/templates/composer.json</strong></p>
+<pre><code class="lang-js">{
+  <span class="string">"database"</span>: {
+    <span class="string">"protocol"</span>: <span class="string">"http"</span>,
+    <span class="string">"host"</span>: <span class="string">"{{ servers.couchdb[0].public[0] }}"</span>,
+    <span class="string">"database"</span>: <span class="string">"composer"</span>,
+    <span class="string">"port"</span>: <span class="number">5984</span>,
+    <span class="string">"auth"</span>: {
+      <span class="string">"username"</span>: <span class="string">"couchdb-user"</span>,
+      <span class="string">"password"</span>: <span class="string">"couchdb-password"</span>
+    }
+  }
+}</code></pre>
+<p>As you can see this example illustrates <strong>a few important conventions.</strong></p>
+<ul>
+<li><strong>All configuration for <code>remoteDependencies</code> is available under <code>servers.[dependency-name]</code></strong></li>
+<li><strong>All <code>remoteDependencies</code> are always Array.</strong></li>
+<li><strong>The information available for remoteDependencies is:</strong><pre><code>{
+  &quot;public&quot;:  [&#39;list&#39;, &#39;of&#39;, &#39;public&#39;,  &#39;ip-addresses&#39;],
+  &quot;private&quot;: [&#39;list&#39;, &#39;of&#39;, &#39;private&#39;, &#39;ip-addresses&#39;]
+}</code></pre>
+</li>
+</ul>
+<h3>2. Remote dependencies will be satisfied when provisioning</h3>
+<p>When a server with this <code>system.json</code> is provisioned using <a href="/baton">baton</a> or <code>conservatory</code>, we will ensure that all of the <code>remoteDependencies</code> exist on servers that are running. <strong>If the <code>remoteDependencies</code> are not satisfied initially then <a href="/baton">baton</a> or <code>conservatory</code> will provision them <em>before provisioning the composer server.</em></strong></p>
+<p>In our <code>composer</code> example, that means that <strong>if a server running <code>couchdb</code> does not exist then one will be created <em>before provisioning the composer server.</em></strong></p>
+<pre><code>  baton servers create --role composer --prepare</code></pre>
 </div>
 </div></article>
     </section>

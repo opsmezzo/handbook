@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+
+  <title>OpsMezzo Handbook</title>
+
+  <meta name="description" content="The OpsMezzo Handbook" />
+  <meta name="author" content="Nodejitsu Inc" />
+  <meta name="viewport" content="width=device-width" />
+
+  <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
+  <link rel="stylesheet" href="/css/github.css">
+  <link rel="stylesheet" href="/css/menus.css">
+  <link rel="stylesheet" href="/css/api.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <style>
+    .opsmezzo {
+      background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
+      margin: 0;
+      float: left;
+      height: 96px;
+      width: 280px;
+      text-indent: -9999px;
+    }
+  </style>
+</head>
+
+<body class="container">
+  <section id="navigation" class="navigation">
+    <nav class="row">
+      <h1>
+        <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
+      </h1>
+      <a href="#navigation" class="mobile btn ss-rows"></a>
+      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+        <s class="ss-home" role="presentation"></s>
+        home
+      </a>
+    </nav>
+  </section>
+  <div class="faux-columns">
+    <section class="documentation row">
+      <aside class="sidebar threehalfcol" role="complementary">
+        <div id="toc">
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/faq" class="title">FAQ</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/using-conventions" class="title">CLI Conventions</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/system-json" class="title">Working with system.json</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/remote-dependencies" class="title">Remote dependencies</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/reference" class="title">system.json Reference</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/quill" class="title">Using quill</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/aliases" class="title">Common Aliases</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/config" class="title">Quill configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/updating-systems" class="title">Updating systems</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/configuration" class="title">Working with configuration</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/baton" class="title">Using baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/config" class="title">Baton configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/bootstrapping" class="title">Bootstrapping Servers</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
+    </span>
+  </span>
+</div>
+</div>
+      </aside>
+
+      <article class="column eighthalfcol last" id="content" role="main"><div>
+  <div class="page-details">
+    <h1 class="title">Conservatory API Reference</h1>
+    <hr>
+  </div>
+  <div class="content"><pre><code>  $ ./conservatory/bin/provisioner 
+
+
+          ___  ____ _   _  ___  ___  ___ _  __ ____ ____ ____  ___ _  __
+         /    /   / /\  / /__  /_   /__/ |  / /___/  /  /   / /__/ /__/
+        /___ /___/ /  \/ ___/ /__  /  \  |_/ /   /  /  /___/ /  \  /
+
+        © 2010 Nodejitsu Inc.
+        All Rights Reserved - www.nodejitsu.com
+
+
+  conservatory has started successfully as provisioner @ 127.0.0.1 on port 9003...</code></pre>
+<p>Conservatory exposes a RESTful backend for managing <code>Servers</code>, <code>Roles</code>, and <code>Groups</code>. This is the backend for  <a href="/baton"><code>baton</code></a>.</p>
+<ul>
+<li><a href="#resource-ids">Resource Ids</a></li>
+<li><strong>REST Resources</strong><ul>
+<li><a href="#servers">Servers</a></li>
+<li><a href="#clusters">Clusters</a></li>
+<li><a href="#roles">Roles</a></li>
+<li><a href="#groups">Groups</a></li>
+<li><a href="#providers">Providers</a></li>
+<li><a href="#users">Users</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+
+<p><em>There is a <a href="/api/conservatory/full-reference">single-page API reference available here.</a></em></p>
+<hr>
+
+<h2>Resource Ids</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Resource</th>
+      <th>Id</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>Cluster name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+  <tr>
+    <td>Group name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+  <tr>
+    <td>Provider name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+  <tr>
+    <td>Role name</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+  <tr>
+    <td>Role version</td>
+    <td>Valid <a href="http://semver.org">Semver</a></td>
+  </tr>
+  <tr>
+    <td>Server id</td>
+    <td><code>/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/</code></td>
+  </tr>
+  <tr>
+    <td>Username</td>
+    <td><code>/([\w_-\.]+)/</code></td>
+  </tr>
+</table>
+
+<hr>
+
+<p><a name="servers"></a></p>
+<h2>Servers</h2>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /servers</code></td>
+    <td>None</td>
+    <td>Returns a list of all servers.</td>
+  </tr>
+  <tr>
+    <td><code>GET /servers/:id</code></td>
+    <td>None</td>
+    <td>Returns the informations about the server with <code>id</code>.</td>
+  </tr>
+  <tr>
+    <td><code>POST /servers/:id</code></td>
+    <td>JSON</td>
+    <td>Adds an existing server to conservatory. <strong>Will not provision from your IaaS provider.</strong></td>
+  </tr>
+  <tr>
+    <td><code>PUT /servers/:id</code></td>
+    <td>JSON</td>
+    <td>Updates the server with the specified <code>id</code>.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /servers/:id</code></td>
+    <td>None</td>
+    <td>Removes a server from conservatory. <strong>Will not remove the server from your IaaS provider.</strong></td>
+  </tr>
+  <tr>
+    <td><code>POST /servers/tagged</code></td>
+    <td>JSON</td>
+    <td>Returns a list of all servers with the specified <code>body.tags</code>.</td>
+  </tr>
+  <tr>
+    <td><code>POST /servers/uid</code></td>
+    <td>JSON</td>
+    <td>Returns the unique identifier for the server information.</td>
+  </tr>
+</table>
+
+<hr>
+
+<p><a name="clusters"></a></p>
+<h2>Clusters</h2>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /clusters/:cluster/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers with the specified <code>cluster</code>.</td>
+  </tr><br></table>
+
+<hr>
+
+<p><a name="roles"></a></p>
+<h2>Roles</h2>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /roles</code></td>
+    <td>None</td>
+    <td>Returns a list of all roles.</td>
+  </tr>
+  <tr>
+    <td><code>GET /roles/:name</code></td>
+    <td>None</td>
+    <td>Returns the informations about the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>POST /roles/:name</code></td>
+    <td>JSON</td>
+    <td>Creates a new role.</td>
+  </tr>
+  <tr>
+    <td><code>PUT /roles/:name</code></td>
+    <td>JSON</td>
+    <td>Adds a version to the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /roles/:name</code></td>
+    <td>None</td>
+    <td>Deletes the corresponding role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /roles/:name/:version</code></td>
+    <td>None</td>
+    <td>Removes the <code>version</code> for the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>GET /roles/:name/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers for the role with <code>name</code>.</td>
+  </tr><br></table>
+
+<hr>
+
+<p><a name="groups"></a></p>
+<h2>Groups</h2>
+<h3>Basic Operations</h3>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /groups</code></td>
+    <td>None</td>
+    <td>Returns a list of all groups.</td>
+  </tr>
+  <tr>
+    <td><code>GET /groups/:name</code></td>
+    <td>None</td>
+    <td>Returns the informations about the group with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>POST /groups/:name</code></td>
+    <td>JSON</td>
+    <td>Creates a new group.</td>
+  </tr>
+  <tr>
+    <td><code>PUT /groups/:name</code></td>
+    <td>JSON</td>
+    <td>Updates the group with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /groups/:name</code></td>
+    <td>None</td>
+    <td>Deletes the corresponding group with <code>name</code>.</td>
+  </tr>
+</table>
+
+<hr>
+
+<h3>Servers in Group</h3>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /groups/:name/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers for the role with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>GET /groups/:name/servers/:id</code></td>
+    <td>None</td>
+    <td>Lists details for the server with IP <code>server</code> in group <code>group</code>.</td>
+  </tr>
+  <tr>
+    <td><code>PUT /groups/:name/servers/:id</code></td>
+    <td>None</td>
+    <td>Updates the server with <code>id</code> in the group with <code>name</code>.</td>
+  </tr>
+  <tr>
+    <td><code>DELETE /groups/:name/servers/:id</code></td>
+    <td>None</td>
+    <td>Removes a server from conservatory. <strong>Will not remove the server from your IaaS provider.</strong></td>
+  </tr>
+</table>
+
+<hr>
+
+<p><a name="providers"></a></p>
+<h2>Providers</h2>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /providers/:provider/groups</code></td>
+    <td>None</td>
+    <td>Lists all groups for the specified provider.</td>
+  </tr><br></table>
+
+<hr>
+
+<h2>Users</h2>
+<table>
+  <thead>
+    <th>Route</th>
+    <th>Body</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td><code>GET /users/:name/servers</code></td>
+    <td>None</td>
+    <td>Lists all servers created by the user with <code>name</code>.</td>
+  </tr>
+</table>
+
+</div>
+</div></article>
+    </section>
+  </div>
+  <!-- row -->
+
+  <footer class="doormat">
+    <section class="row">
+      <dl class="twocol">
+        <dt>Resources</dt>
+        <dd>
+          <a href="http://legal.nodejitsu.com/privacy">
+            Privacy policy
+          </a>
+        </dd>
+        <dd>
+          <a href="http://legal.nodejitsu.com/terms-of-service">
+            Terms of Service
+          </a>
+        </dd>
+      </dl>
+      <dl class="newsletter twocol right">
+        <dt>Stay connected</dt>
+        <dd>
+          <ul class="social">
+            <li>
+              <a href="https://twitter.com/opsmezzo" class="ss-twitter ss-social-circle" title="Follow @opsmezzo on Twitter"></a>
+            </li>
+            <li>
+              <a href="https://github.com/opsmezzo" class="ss-octocat ss-social-circle" title="Fork @opsmezzo on Github"></a>
+            </li>
+            <li class="copyright right">&copy; Nodejitsu Inc.</li>
+          </ul>
+        </dd>
+      </dl>
+
+    </section>
+  </footer>
+  <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  <script>
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+  </script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+  <script src="/js/slugify.js"></script>
+</body>
+</html>

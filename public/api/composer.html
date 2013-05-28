@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
   <link rel="stylesheet" href="/css/github.css">
   <link rel="stylesheet" href="/css/menus.css">
-  <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
     .opsmezzo {
@@ -152,12 +151,48 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">FAQ</h1>
+    <h1 class="title">Composer API Reference</h1>
     <hr>
   </div>
-  <div class="content"><h2>How do I use <code>quill</code> or <code>baton</code> behind a proxy?</h2>
-<p>Just set the proxy setting:</p>
-<pre><code>  [baton|quill] config set proxy http://[&lt;auth&gt;@]&lt;host&gt;:&lt;port&gt;</code></pre>
+  <div class="content"><p><a name="systems"></a></p>
+<h2>Systems</h2>
+<pre><code>/systems</code></pre>
+<p><strong>GET</strong> Returns a list of all systems</p>
+<hr>
+
+<pre><code>/systems/:system-name</code></pre>
+<p><strong>GET</strong> Returns the informations about the system named <code>system-name</code></p>
+<p><strong>POST</strong> Creates a new system</p>
+<p><strong>PUT</strong> Adds a version to the system named <code>system-name</code></p>
+<p><strong>DELETE</strong> Deletes the corresponding system (<strong>this action cannot be undone</strong>)</p>
+<hr>
+
+<pre><code>/systems/:system-name/owners</code></pre>
+<p><strong>PUT</strong> Adds to the <code>system-name</code> maintainers the users specified in the body</p>
+<p><strong>DELETE</strong> Removes from the <code>system-name</code> maintainers all the users specified in the body</p>
+<hr>
+
+<pre><code>/systems/:system-name/:version</code></pre>
+<p><strong>DELETE</strong> Removes the version details for the <code>system-name</code></p>
+<p><strong>PUT</strong> Adds the attached tarball to the <code>system-name</code> and <code>version</code></p>
+<p><strong>GET</strong> Returns the tarball for the specified <code>system-name</code> and <code>version</code></p>
+<hr>
+
+<p><a name="config"></a></p>
+<h2>Config</h2>
+<pre><code>/config</code></pre>
+<p><strong>GET</strong> Lists all configs</p>
+<hr>
+
+<pre><code>/config/:id</code></pre>
+<p><strong>GET</strong> Returns details for config with the specified <code>id</code></p>
+<p><strong>POST</strong> Creates a new config</p>
+<p><strong>DELETE</strong> Removes the config with the specified <code>id</code></p>
+<hr>
+
+<pre><code>/config/:id/path/to/key</code></pre>
+<p><strong>PUT</strong> Sets the JSON body in the settings value of the environment with the specified <code>id</code></p>
+<p><strong>DELETE</strong> Clears the key in the settings value of the environment with the specified <code>id</code> </p>
 </div>
 </div></article>
     </section>
