@@ -1,7 +1,8 @@
-**Flawless configuration of your cloud infrastructure:** `quill` is a configuration tool with a focus on automation and infrastructure opacity.
+`quill` is a configuration and system management tool. It is easy to think of it as an "operating system agnostic package manager".
+
 <img src="/img/screenshots/quill.png" />
 
-`quill` is a configuration and system management tool. It is easy to think of it as an "operating system agnostic package manager".
+<hr>
 
 ### Learn more
 
@@ -13,7 +14,11 @@
   * [Systems](/quill/resources/systems)
   * [Config](/quill/resources/config)
 
+<hr>
+
 <a name="usage"></a>
+## Basic Usage
+
 `quill` is a robust and fully-featured configuration toolset with a simple convention for executing commands:
 
 ``` bash

@@ -68,4 +68,4 @@ For the purposes of configuring systems during a given _lifecycle-action_, `quil
 * [Setting environment variables in system.json scripts](/system-json/configuration#scripts)
 * [Templating system.json files](/system-json/configuration#files)
 
-[meta:title]: <> (Configuration management)
+[meta:title]: <> (Working with configuration)

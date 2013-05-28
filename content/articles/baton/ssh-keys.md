@@ -1,6 +1,6 @@
 SSH keys management can be done with `baton` using the following commands:
 
-<hr/>
+<hr>
 
 ### Add SSH public keys
 
@@ -23,7 +23,7 @@ Defaults:
 * **<public-key>** `~/.ssh/id_rsa.pub`
 * **<name>** `publicKey`
 
-<hr/>
+<hr>
 
 ### Sync keys with Infrastructure providers
 
@@ -38,7 +38,6 @@ baton keys sync
 baton keys sync <username>
 baton keys sync --group <group>
 ```
-
 
 Syncs the keys a given `username` with a given group (i.e. IaaS provider). If no username is provided then all SSH public keys are synced with the specified group.
 

@@ -4,6 +4,7 @@ _Configuration management_ refers to configuring a single system running on a re
 * [Using configuration in system.json files and scripts](#scripts-files)
   * [Setting environment variables in system.json scripts](#scripts)
   * [Templating system.json files](#files)
+* [Configuration for remoteDependencies](#remote-dependencies)
 
 <hr>
 <a name="hierarchy"></a>
@@ -193,5 +194,13 @@ will be turned into:
 ```
   hostname = prod.mysite.com
 ```
+
+<a name="remote-dependencies"></a>
+## Configuration for remoteDependencies
+
+When a [system.json](/system-json) package has [remoteDependencies](/system-json/remote-dependencies), the information about servers which satisfy them is available for both `/scripts` and `/templates`.
+
+For more information on [remoteDependencies](/system-json/remote-dependencies), see the [full article on them.](/system-json/remote-dependencies)
+
 
 [meta:title]: <> (Configuration management)

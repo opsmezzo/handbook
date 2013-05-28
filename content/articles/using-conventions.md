@@ -1,4 +1,3 @@
-<hr>
 _If you haven't already installed [baton and quill](/a-quickstart/installation) you should **do so now before continuing.**_
 <hr>
 
