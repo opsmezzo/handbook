@@ -155,4 +155,4 @@ So _with little or no attention paid to performance_ we're already processing **
 [ewma]: http://en.wikipedia.org/wiki/Exponential_smoothing#The_exponential_moving_average
 [window-stream]: https://github.com/indexzero/window-stream
 
-[meta:title]: <> (Godot & Streams)
+[meta:title]: <> (What is Godot?)

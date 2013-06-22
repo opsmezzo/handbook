@@ -61,3 +61,5 @@ The lookup table for the _Service Registry_ can be calculated from `_design/App/
 ### Conservatory
 
 The lookup table for the _Service Registry_ can be calculated from `_design/Server/_view/all` and `_design/Role/_view/all`.
+
+[meta:title]: <> (High Performance Monitoring)

@@ -13,7 +13,8 @@
             "system-json",
             "api",
             "quill",
-            "baton"
+            "baton",
+            "instruments"
           ]
         }
       }
@@ -30,7 +31,8 @@
             "system-json",
             "api",
             "quill",
-            "baton"
+            "baton",
+            "instruments"
           ]
         }
       }

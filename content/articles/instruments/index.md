@@ -25,4 +25,4 @@ Automating these common tasks frees up your developers and operations engineers 
 
 [godot]: /instruments/godot
 
-[meta:title]: <> (Orchestrion)
+[meta:title]: <> (Monitoring with Instruments)
