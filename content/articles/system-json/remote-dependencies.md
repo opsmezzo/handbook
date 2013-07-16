@@ -107,5 +107,6 @@ could be pointing to the wrong server. **Clusters allow you solve this problem e
   baton configure composer --cluster production --config production
 ```
 
+If there is no CouchDB in `production` cluster, `baton` will create one for you (just like it would create a remote dependency).
 
 [meta:title]: <> (Remote dependencies)
