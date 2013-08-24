@@ -11,10 +11,10 @@
             "faq",
             "using-conventions",
             "system-json",
-            "api",
             "quill",
             "baton",
-            "instruments"
+            "instruments",
+            "api"
           ]
         }
       }
@@ -29,10 +29,10 @@
             "faq",
             "using-conventions",
             "system-json",
-            "api",
             "quill",
             "baton",
-            "instruments"
+            "instruments",
+            "api"
           ]
         }
       }

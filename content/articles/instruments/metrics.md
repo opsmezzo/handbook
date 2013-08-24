@@ -190,4 +190,4 @@ Logs can be sent to godot reactors, with a single `{ metric: 1 }` where the desc
 }
 ```
 
-[meta:title]: <> (Pre-defined Metrics & Events)
+[meta:title]: <> (Predefined Metrics & Events)
