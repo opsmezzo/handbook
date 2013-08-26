@@ -4,6 +4,7 @@
  */
  
 .faux-columns .sidebar { min-width: 275px; }
+.faux-columns .column, .faux-columns .sidebar { padding-top: 10px; }
 .row .threehalfcol     { width: 25%; }
 .row .eighthalcol      { width: 25%; }
 .faux-columns .sidebar a.active:after, .faux-columns .sidebar a.active:before {
