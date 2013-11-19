@@ -45,4 +45,4 @@ will list all `system` Resources in your current registry. The tool itself is de
   quill ok
 ```
 
-[meta:title]: <> (Using quill)
+[meta:title]: <> (Configuring with quill)

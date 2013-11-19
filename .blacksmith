@@ -11,9 +11,10 @@
             "faq",
             "using-conventions",
             "system-json",
-            "api",
             "quill",
-            "baton"
+            "baton",
+            "instruments",
+            "api"
           ]
         }
       }
@@ -28,9 +29,10 @@
             "faq",
             "using-conventions",
             "system-json",
-            "api",
             "quill",
-            "baton"
+            "baton",
+            "instruments",
+            "api"
           ]
         }
       }

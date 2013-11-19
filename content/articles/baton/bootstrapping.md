@@ -15,6 +15,7 @@ Servers are created and/or bootstrapped in `baton` via `baton servers create*`. 
   --flavor-id  Size of the server (e.g. 256MB RAM)
   --image-id   Image to use on the server (e.g. Ubuntu 11.10)
   --group      Group name server will be placed into
+  --cluster    Cluster name(s) which this server belongs to.
 ```
 
 <hr>

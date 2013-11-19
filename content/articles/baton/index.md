@@ -43,4 +43,4 @@ will list all `group` resources in your current cloud setup. It is designed to b
   baton ok
 ```
 
-[meta:title]: <> (Using baton)
+[meta:title]: <> (Orchestrating with baton)
