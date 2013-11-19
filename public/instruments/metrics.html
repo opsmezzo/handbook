@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+
+  <title>OpsMezzo Handbook</title>
+
+  <meta name="description" content="The OpsMezzo Handbook" />
+  <meta name="author" content="Nodejitsu Inc" />
+  <meta name="viewport" content="width=device-width" />
+
+  <link rel="stylesheet" href="https://versions.nodejitsu.com/id:home/css/jitsu.min.css">
+  <link rel="stylesheet" href="/css/github.css">
+  <link rel="stylesheet" href="/css/menus.css">
+  <link rel="stylesheet" href="/css/api.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <style>
+    .navigation h1 { overflow: visible; }
+    .opsmezzo {
+      background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
+      margin: -20px 0 0 0;
+      float: left;
+      height: 96px;
+      width: 280px;
+      text-indent: -9999px;
+    }
+  </style>
+</head>
+
+<body class="container">
+  <section id="navigation" class="navigation">
+    <nav class="row">
+      <h1>
+        <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
+      </h1>
+      <a href="#navigation" class="mobile btn ss-rows"></a>
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
+        <s class="ss-home" role="presentation"></s>
+        home
+      </a>
+    </nav>
+  </section>
+  <div class="faux-columns">
+    <section class="documentation row">
+      <aside class="sidebar threehalfcol" role="complementary">
+        <div id="toc">
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/faq" class="title">FAQ</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/using-conventions" class="title">CLI Conventions</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/system-json" class="title">Working with system.json</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/configuration" class="title">Configuration management</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/remote-dependencies" class="title">Remote dependencies</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/lifecycle" class="title">System lifecycle</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/system-json/reference" class="title">system.json Reference</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/quill" class="title">Configuring with quill</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/aliases" class="title">Common Aliases</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/config" class="title">Quill configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/updating-systems" class="title">Updating systems</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/quill/configuration" class="title">Working with configuration</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/resources" class="title">CLI Resources</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/config" class="title">Baton configuration</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/bootstrapping" class="title">Bootstrapping Servers</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
+    </span>
+  </span>
+</div>
+</div>
+      </aside>
+
+      <article class="column eighthalfcol last" id="content" role="main"><div>
+  <div class="page-details">
+    <h1 class="title">Predefined Metrics & Events</h1>
+    <hr>
+  </div>
+  <div class="content"><p>The goal of the <code>instrument</code> processors is to calculate and respond to various metrics about the health and network activity of running processes in both <code>Conservatory</code> and <code>Nodejitsu</code>. Many metrics can be viewed:</p>
+<ul>
+<li><strong>Nodejitsu</strong><ul>
+<li>Per drone</li>
+<li>Averaged per App</li>
+</ul>
+</li>
+<li><strong>Conservatory</strong><ul>
+<li>Per server</li>
+<li>Averaged per Role</li>
+</ul>
+</li>
+</ul>
+<h3 id="health-metrics">Health metrics</h3>
+<p>Health metrics are the most basic metrics produced by our <a href="https://github.com/nodejitsu/estragon">low-memory godot agent</a>. All of these metrics can be viewed per drone / server or and averaged per App / Role. </p>
+<ul>
+<li>CPU</li>
+<li>Free Memory</li>
+<li>Free Disk Space</li>
+<li>Heartbeat</li>
+<li>Uptime</li>
+<li>Total Restarts</li>
+</ul>
+<h3 id="network-metrics">Network metrics</h3>
+<p>Network metrics come in two forms: </p>
+<ul>
+<li><em>Inbound HTTP:</em> Those produced by our Load Balancers (see <a href="https://github.com/nodejitsu/balanceboard/compare/godot">balanceboard#godot</a>.</li>
+<li><em>Outbound TCP:</em> These are not currently captured, but could be handled by something like <a href="https://github.com/mrannry/node_pcap">node-pcap</a>. <strong>This is not currently being considered.</strong></li>
+</ul>
+<p>The metrics about <em>Inbound HTTP</em> we will be tracking are:</p>
+<ul>
+<li>Number of Active Requests (i.e. <a href="#request-start">http/start</a> - <a href="#request-end">http/end</a>)</li>
+<li>Total Requests (i.e. <a href="#request-start">http/start</a>)</li>
+<li>Total Requests by URL </li>
+<li>Total Requests Completed (i.e. <a href="#request-end">http/end</a>)</li>
+<li>Total Requests Completed by URL</li>
+<li>Average Response Time (i.e. <a href="#response-time">http/response-time</a>)</li>
+<li>Average Response Time by URL</li>
+</ul>
+<h3 id="scaling-criteria">Scaling criteria</h3>
+<p>The most important task performed by our processors is to decide when to scale a given application or role. There are more than one criteria which can cause a scale up or scale down transition. </p>
+<p><strong>Several of these metrics may need to be considered both on the average (across the App or Role) and on the individual host</strong> The cannonical example of course is if a single host is misbehaving, but not experiencing load required to scale, we should recover the host, but not add additional hosts.</p>
+<p>The criteria that must be taken into consideration are:</p>
+<ul>
+<li>Response Time</li>
+<li>Average Response Time</li>
+<li>CPU</li>
+<li>Average CPU</li>
+<li>Memory</li>
+<li>Average Memory</li>
+</ul>
+<p>The basic approach for scaling is to borrow a concept used often in Finance: <a href="http://en.wikipedia.org/wiki/Bollinger_Bands">Bollinger Bands</a></p>
+<p><img src="http://f.cl.ly/items/0n0i3v2f1x0J1S112l1R/bollinger-bands.png" alt=""></p>
+<p>The <em>Bollinger Band approach</em> means that:</p>
+<blockquote>
+<p>If the metric value exceeds the EWMA of the N-period time window for the same metric by X standard deviations
+we should <strong>scale up.</strong> Conversely, if the metric value falls below the EWMA by Y standard deviations we should
+<strong>scale down.</strong></p>
+</blockquote>
+<p>There is also another important criteria that needs to be considered: since applications will by nature &quot;load-up&quot; (i.e. allocate memory when starting then settle into a steady state) we should only consider the EWMA criteria past a fixed threshold (memory or uptime).</p>
+<h3 id="global-metrics">Global metrics</h3>
+<p>To give a better gestalt of what is going on an the entire Nodejitsu or Conservatory installation tracking of global metrics (that is, metrics aggregated across all hosts) will be provided:</p>
+<ul>
+<li>Total Global Requests</li>
+<li>Average Global Response Time</li>
+<li>Total Heartbeats</li>
+<li>Total Average Free CPU</li>
+<li>Total Average Free Memory</li>
+</ul>
+<h2 id="logs">Logs</h2>
+<p>Logs can be sent to godot reactors, with a single <code>{ metric: 1 }</code> where the description is the actual log message itself</p>
+<pre><code class="lang-js">  {
+    <span class="string">"service"</span>: <span class="string">"logs/stdout"</span>,
+    <span class="string">"description"</span>: <span class="string">"This is the actual log message"</span>,
+    metric: <span class="number">1</span>
+  }</code></pre>
+<pre><code class="lang-js">  {
+    <span class="string">"service"</span>: <span class="string">"logs/stderr"</span>,
+    <span class="string">"description"</span>: <span class="string">"This is the actual log message"</span>,
+    metric: <span class="number">1</span>
+  }</code></pre>
+<h2 id="health-messages">Health Messages</h2>
+<h3 id="heartbeat">Heartbeat</h3>
+<pre><code class="lang-js">{
+  <span class="string">"host"</span>:    <span class="string">"10.0.0.1"</span>
+  <span class="string">"service"</span>: <span class="string">"health/heartbeat"</span>
+  <span class="string">"metric"</span>:  <span class="number">1</span>,
+  <span class="string">"ttl"</span>:     <span class="number">60000</span>,
+  <span class="string">"meta"</span>:    {
+    <span class="string">"uptime"</span>: <span class="number">123456789</span>, <span class="comment">// milliseconds</span>
+    <span class="string">"pid"</span>:    <span class="string">"12345"</span>
+  }
+}</code></pre>
+<h3 id="cpu">CPU</h3>
+<pre><code class="lang-js">{
+  <span class="string">"host"</span>:    <span class="string">"10.0.0.1"</span>
+  <span class="string">"service"</span>: <span class="string">"health/cpu"</span>
+  <span class="string">"metric"</span>:  <span class="number">30</span>, <span class="comment">// percentage</span>
+  <span class="string">"meta"</span>:    {
+    <span class="string">"pid"</span>: <span class="string">"12345"</span>
+  }
+}</code></pre>
+<h3 id="memory">Memory</h3>
+<pre><code class="lang-js">{
+  <span class="string">"host"</span>:    <span class="string">"10.0.0.1"</span>
+  <span class="string">"service"</span>: <span class="string">"health/memory"</span>
+  <span class="string">"metric"</span>:  <span class="number">102400</span>, <span class="comment">// bytes</span>
+  <span class="string">"meta"</span>:    {
+    <span class="string">"pid"</span>: <span class="string">"12345"</span>
+  }
+}</code></pre>
+<h2 id="network-messages">Network Messages</h2>
+<h3 id="request-start">Request start</h3>
+<pre><code class="lang-js">{
+  <span class="string">"host"</span>:        <span class="string">"10.0.0.1"</span>
+  <span class="string">"service"</span>:     <span class="string">"http/start"</span>
+  <span class="string">"description"</span>: <span class="string">"www.nodejitsu.com/paas"</span>,
+  <span class="string">"metric"</span>:      <span class="number">1</span>,
+  <span class="string">"meta"</span>:        {
+    <span class="string">"balancer"</span>: <span class="string">"165.225.130.241"</span>,
+    <span class="string">"domain"</span>:   <span class="string">"www.nodejitsu.com"</span>,
+    <span class="string">"port"</span>:     <span class="string">"8080"</span>,
+    <span class="string">"url"</span>:      <span class="string">"/paas"</span>
+  }
+}</code></pre>
+<h3 id="request-end">Request end</h3>
+<pre><code class="lang-js">{
+  <span class="string">"host"</span>:        <span class="string">"10.0.0.1"</span>
+  <span class="string">"service"</span>:     <span class="string">"http/end"</span>
+  <span class="string">"description"</span>: <span class="string">"www.nodejitsu.com/paas"</span>,
+  <span class="string">"metric"</span>:      <span class="number">1</span>,
+  <span class="string">"meta"</span>:        {
+    <span class="string">"balancer"</span>: <span class="string">"165.225.130.241"</span>,
+    <span class="string">"domain"</span>:   <span class="string">"www.nodejitsu.com"</span>,
+    <span class="string">"port"</span>:     <span class="string">"8080"</span>,
+    <span class="string">"url"</span>:      <span class="string">"/paas"</span>
+  }
+}</code></pre>
+<h3 id="response-time">Response time</h3>
+<pre><code class="lang-js">{
+  <span class="string">"host"</span>:        <span class="string">"10.0.0.1"</span>
+  <span class="string">"service"</span>:     <span class="string">"http/response-time"</span>
+  <span class="string">"description"</span>: <span class="string">"www.nodejitsu.com/paas"</span>,
+  <span class="string">"metric"</span>:      <span class="number">108</span>, <span class="comment">// milliseconds</span>
+  <span class="string">"meta"</span>:        {
+    <span class="string">"balancer"</span>: <span class="string">"165.225.130.241"</span>,
+    <span class="string">"domain"</span>:   <span class="string">"www.nodejitsu.com"</span>,
+    <span class="string">"port"</span>:     <span class="string">"8080"</span>,
+    <span class="string">"url"</span>:      <span class="string">"/paas"</span>
+  }
+}</code></pre>
+</div>
+</div></article>
+    </section>
+  </div>
+  <!-- row -->
+
+  <footer class="doormat">
+    <section class="row">
+      <dl class="twocol">
+        <dt>Resources</dt>
+        <dd>
+          <a href="http://legal.nodejitsu.com/privacy">
+            Privacy policy
+          </a>
+        </dd>
+        <dd>
+          <a href="http://legal.nodejitsu.com/terms-of-service">
+            Terms of Service
+          </a>
+        </dd>
+      </dl>
+      <dl class="newsletter twocol right">
+        <dt>Stay connected</dt>
+        <dd>
+          <ul class="social">
+            <li>
+              <a href="https://twitter.com/opsmezzo" class="ss-twitter ss-social-circle" title="Follow @opsmezzo on Twitter"></a>
+            </li>
+            <li>
+              <a href="https://github.com/opsmezzo" class="ss-octocat ss-social-circle" title="Fork @opsmezzo on Github"></a>
+            </li>
+            <li class="copyright right">&copy; Nodejitsu Inc.</li>
+          </ul>
+        </dd>
+      </dl>
+
+    </section>
+  </footer>
+  <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  <script>
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+  </script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+  <script src="/js/slugify.js"></script>
+</body>
+</html>

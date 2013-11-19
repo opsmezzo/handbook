@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -147,6 +137,44 @@
     </span>
   </span>
 </div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
+    </span>
+  </span>
+</div>
 </div>
       </aside>
 
@@ -163,7 +191,7 @@
 </ul>
 <p><hr>
 <a name="managing"></a></p>
-<h2>Managing configuration from <code>quill</code></h2>
+<h2 id="managing-configuration-from-quill-">Managing configuration from <code>quill</code></h2>
 <p>Remote configuration can be managed from <code>quill</code> using <code>remote</code> resource:</p>
 <pre><code class="lang-bash">  quill remote &lt;command&gt;</code></pre>
 <p>To get started you&#39;ll want to create a remote named configuration:</p>
@@ -180,7 +208,7 @@
     value: <span class="number">42</span>
   }</code></pre>
 <p>You can more granularly manipulate remote configurations through <a href="/quill/resources/remote"><strong><em>quill remote</em></strong> commands</a>.</p>
-<h3>Specifying configuration during a <em>lifecycle-action</em></h3>
+<h3 id="specifying-configuration-during-a-_lifecycle-action_">Specifying configuration during a <em>lifecycle-action</em></h3>
 <p>Config can be specified when running each action separately. There are two ways, both of which use the <code>--config</code> option when running <code>quill &lt;lifecycle-action&gt;</code>:</p>
 <pre><code>  quill --config &lt;key&gt;=&lt;value&gt; &lt;lifecycle-action&gt;</code></pre>
 <p>which simply sets <code>&lt;key&gt;</code> to <code>&lt;value&gt;</code>, and</p>
@@ -188,12 +216,12 @@
 <p>which loads config called <code>&lt;name&gt;</code> from the <a href="/conservatory/composer">composer</a>.</p>
 <p><hr>
 <a name="baton-quill"></a></p>
-<h2><code>baton</code> and <code>quill</code> interaction</h2>
+<h2 id="-baton-and-quill-interaction"><code>baton</code> and <code>quill</code> interaction</h2>
 <p>When bootstrapping a server, <code>baton</code> executes <code>quill</code> on the remote machine, using <code>--config</code> parameters to load configurations for group, role and system from provisioner. e.g.</p>
 <pre><code>  baton servers create --config highest-priority-config-to-use [...]</code></pre>
 <p><hr>
 <a name="scripts-files"></a></p>
-<h2>Using configuration in system.json files and scripts</h2>
+<h2 id="using-configuration-in-system-json-files-and-scripts">Using configuration in system.json files and scripts</h2>
 <p>For the purposes of configuring systems during a given <em>lifecycle-action</em>, <code>quill</code> supports two ways of injecting config values into files and scripts.</p>
 <ul>
 <li><a href="/system-json/configuration#scripts">Setting environment variables in system.json scripts</a></li>

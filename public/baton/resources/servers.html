@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -144,6 +134,44 @@
   </span><span class="tree">
     <span class="page-details">
       <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
     </span>
   </span>
 </div>
@@ -164,7 +192,7 @@ info:    It worked if it ends with baton ok
 info:    Executing command help servers
 help:    `baton servers *` commands work with raw and managed server resources
 (...)</code></pre>
-<h4>Learn more</h4>
+<h4 id="learn-more">Learn more</h4>
 <ul>
 <li><a href="#create-servers">Create Servers</a></li>
 <li><a href="/baton/bootstrapping">Bootstraping Servers</a></li>
@@ -174,13 +202,13 @@ help:    `baton servers *` commands work with raw and managed server resources
 </ul>
 <hr>
 
-<h2>Create servers</h2>
-<h3><code>baton servers create</code></h3>
+<h2 id="create-servers">Create servers</h2>
+<h3 id="-baton-servers-create-"><code>baton servers create</code></h3>
 <p>Creates a server in the target environment with the name and role specified by prompt</p>
 <p><code>--prepare</code> Bootstraps the server without relying on image being bootstrapped</p>
-<h3><code>baton servers createimage</code></h3>
+<h3 id="-baton-servers-createimage-"><code>baton servers createimage</code></h3>
 <p>Creates an image server in the target environment with the name and role specified by prompt</p>
-<h3><code>baton servers createraw</code></h3>
+<h3 id="-baton-servers-createraw-"><code>baton servers createraw</code></h3>
 <p>Creates a raw server (i.e. no pre-installed systems) with the image and flavor provided by prompt or arguments.</p>
 <pre><code class="lang-bash">--name       Server name
 --group      Group server belongs to
@@ -189,27 +217,27 @@ help:    `baton servers *` commands work with raw and managed server resources
 --insert     Forces insertion of raw server into Conservatory</code></pre>
 <hr>
 
-<h2>Destroy Servers</h2>
-<h3><code>baton servers delete &lt;id&gt;</code></h3>
+<h2 id="destroy-servers">Destroy Servers</h2>
+<h3 id="-baton-servers-delete-id-"><code>baton servers delete &lt;id&gt;</code></h3>
 <p>Delete a server from the specified environment</p>
 <p><code>--ignoredb</code>   ignore errors when deleting the server from CouchDB</p>
 <hr>
 
-<h2>Run commands on Servers</h2>
-<h3><code>baton servers bootstrap</code></h3>
+<h2 id="run-commands-on-servers">Run commands on Servers</h2>
+<h3 id="-baton-servers-bootstrap-"><code>baton servers bootstrap</code></h3>
 <p>Bootstraps a server with all of quill&#39;s dependencies</p>
-<h3><code>baton servers run</code></h3>
+<h3 id="-baton-servers-run-"><code>baton servers run</code></h3>
 <p>Runs the commands specified on all servers with the target role in target environment</p>
 <hr>
 
-<h2>Query Servers</h2>
-<h3><code>baton servers listraw</code></h3>
+<h2 id="query-servers">Query Servers</h2>
+<h3 id="-baton-servers-listraw-"><code>baton servers listraw</code></h3>
 <p>Lists all servers in the specified environment by contacting the IaaS service provider directly</p>
-<h3><code>baton servers listraw &lt;pattern&gt;</code></h3>
+<h3 id="-baton-servers-listraw-pattern-"><code>baton servers listraw &lt;pattern&gt;</code></h3>
 <p>Same as <code>listraw</code> but with given Regex pattern for filtering</p>
-<h3><code>baton servers view &lt;id&gt;</code></h3>
+<h3 id="-baton-servers-view-id-"><code>baton servers view &lt;id&gt;</code></h3>
 <p>Views the details for the server with the specified <code>id</code></p>
-<h3><code>baton servers rename &lt;id&gt; &lt;name&gt;</code></h3>
+<h3 id="-baton-servers-rename-id-name-"><code>baton servers rename &lt;id&gt; &lt;name&gt;</code></h3>
 <p>Renames a server with given `id</p>
 </div>
 </div></article>

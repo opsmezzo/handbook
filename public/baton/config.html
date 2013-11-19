@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -147,6 +137,44 @@
     </span>
   </span>
 </div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
+    </span>
+  </span>
+</div>
 </div>
       </aside>
 
@@ -158,7 +186,7 @@
   <div class="content"><p>There are various local configuration values that you should be aware of when working with <code>baton</code>.</p>
 <hr>
 
-<h2>Available commands</h2>
+<h2 id="available-commands">Available commands</h2>
 <p>Working with local config in <code>baton</code> is just like working with local config in <code>quill</code> or <code>jitsu</code> and is provided by <a href="https://github.com/flatiron/cli-config">flatiron-cli-config</a>.</p>
 <pre><code>baton conf
 baton config list
@@ -194,79 +222,79 @@ baton config delete &lt;key&gt;</code></pre>
   info:    baton ok</code></pre>
 <hr>
 
-<h2>Config Settings</h2>
-<h3>colors</h3>
+<h2 id="config-settings">Config Settings</h2>
+<h3 id="colors">colors</h3>
 <ul>
 <li>Default: <code>true</code></li>
 <li>Type: Boolean</li>
 </ul>
 <p>Show colored output</p>
-<h3>concurrency</h3>
+<h3 id="concurrency">concurrency</h3>
 <ul>
 <li>Default: 75</li>
 <li>Type: Number</li>
 </ul>
 <p>The concurrency with which to run SSH on servers</p>
-<h3>remoteHost</h3>
+<h3 id="remotehost">remoteHost</h3>
 <ul>
 <li>Default: localhost</li>
 <li>Type: String</li>
 </ul>
 <p>The provisioner API endpoint</p>
-<h3>port</h3>
+<h3 id="port">port</h3>
 <ul>
 <li>Default: 9003</li>
 <li>Type: Number</li>
 </ul>
 <p>The port of the provisioner API endpoint</p>
-<h3>username</h3>
+<h3 id="username">username</h3>
 <ul>
 <li>Default: None</li>
 <li>Type: String</li>
 </ul>
 <p>The username to connect to provisioner</p>
-<h3>password</h3>
+<h3 id="password">password</h3>
 <ul>
 <li>Default: None</li>
 <li>Type: String</li>
 </ul>
 <p>The password to connect to provisioner</p>
-<h3>tunnel</h3>
+<h3 id="tunnel">tunnel</h3>
 <ul>
 <li>Default: None</li>
 <li>Type: String</li>
 </ul>
 <p>The SSH tunnel to connect to the servers</p>
-<h3>debug</h3>
+<h3 id="debug">debug</h3>
 <ul>
 <li>Default: true</li>
 <li>Type: Boolean</li>
 </ul>
 <p>Enable Debug logging</p>
-<h3>keyname</h3>
+<h3 id="keyname">keyname</h3>
 <ul>
 <li>Default: <code>id_rsa</code></li>
 <li>Type: String</li>
 </ul>
 <p>Name of the default private key to use for SSH connections.</p>
-<h3>userconfig</h3>
+<h3 id="userconfig">userconfig</h3>
 <ul>
 <li>Default: &#39;.batonconfig&#39;</li>
 <li>Type: String</li>
 </ul>
 <p>The user configuration file</p>
-<h3>composer</h3>
+<h3 id="composer">composer</h3>
 <p>When bootstrapping servers, <code>baton</code> requires a valid composer server.</p>
 <ul>
 <li><strong>composer:host</strong> <em>(Default: None)</em> Remote host of the composer server.</li>
 <li><strong>composer:port</strong> <em>(Default: 9003)</em> Port of the remote composer server.</li>
 </ul>
-<h3>ssl</h3>
+<h3 id="ssl">ssl</h3>
 <ul>
 <li><strong>ssl:cert</strong> <em>(Default: None)</em> Location of the client SSL certificate to use when making requests to the remote <code>conservatory</code> or <code>composer</code> servers.</li>
 <li><strong>ssl:key</strong> <em>(Default: None)</em> Location of the client SSL key to use when making requests to the remote <code>conservatory</code> or <code>composer</code> servers.</li>
 </ul>
-<h3>bootstrap</h3>
+<h3 id="bootstrap">bootstrap</h3>
 <p>When bootstrapping servers there are several configuration values available to you</p>
 <ul>
 <li><strong>bootstrap:runOnError</strong> <em>(Default <code>false</code>)</em> 
@@ -280,7 +308,7 @@ Interval to use when polling to get an active SSH connection during the bootstra
 <li><strong>bootstrap:poll:max</strong> <em>(Default: <code>10</code>)</em>
 Number of SSH polling attempts to make before marking a bootstrapped server as errored.</li>
 </ul>
-<h3>directories</h3>
+<h3 id="directories">directories</h3>
 <p>The directories used to store/retrieve extra configuration</p>
 <ul>
 <li><strong>directories:keys</strong> <em>(Default: <code>~/.ssh</code>)</em></li>

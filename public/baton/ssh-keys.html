@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -147,6 +137,44 @@
     </span>
   </span>
 </div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
+    </span>
+  </span>
+</div>
 </div>
       </aside>
 
@@ -158,7 +186,7 @@
   <div class="content"><p>SSH keys management can be done with <code>baton</code> using the following commands:</p>
 <hr>
 
-<h3>Add SSH public keys</h3>
+<h3 id="add-ssh-public-keys">Add SSH public keys</h3>
 <pre><code>baton addkey
 baton addkey &lt;public-key&gt;
 baton addkey &lt;public-key&gt; &lt;name&gt;</code></pre>
@@ -173,7 +201,7 @@ baton keys add &lt;public-key&gt; &lt;name&gt;</code></pre>
 </ul>
 <hr>
 
-<h3>Sync keys with Infrastructure providers</h3>
+<h3 id="sync-keys-with-infrastructure-providers">Sync keys with Infrastructure providers</h3>
 <pre><code>baton synckeys
 baton synckeys &lt;username&gt;
 baton synckeys --group &lt;group&gt;</code></pre>

@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -144,6 +134,44 @@
   </span><span class="tree">
     <span class="page-details">
       <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
     </span>
   </span>
 </div>
@@ -174,7 +202,7 @@
 </ul>
 <p><hr>
 <a name="properties/name"></a></p>
-<h3>name</h3>
+<h3 id="name">name</h3>
 <p>The <em>most</em> important things in your system.json are the name and version fields. Those are actually required, and your system won&#39;t install without them. The name and version together form an identifier that is assumed
 to be completely unique. Changes to the system should come along with changes to the version.</p>
 <p>The name is what your thing is called. Some tips:</p>
@@ -187,7 +215,7 @@ Also, it can&#39;t start with a dot or an underscore.</li>
 </ul>
 <p><hr>
 <a name="properties/version"></a></p>
-<h3>version</h3>
+<h3 id="version">version</h3>
 <p>The <em>most</em> important things in your system.json are the name and version fields. Those are actually required, and your system won&#39;t install without them. The name and version together form an identifier that is assumed to be completely unique. Changes to the system should come along with changes to the version.</p>
 <p>Version must be parseable by <a href="https://github.com/isaacs/node-semver">node-semver</a>, which is bundled with <code>quill</code> as a dependency.</p>
 <p>Here&#39;s how quill&#39;s semver implementation deviates from what&#39;s on semver.org:</p>
@@ -198,11 +226,11 @@ Also, it can&#39;t start with a dot or an underscore.</li>
 <p>This is a little bit confusing to explain, but matches what you see in practice when people create tags in git like &quot;v1.2.3&quot; and then do &quot;git describe&quot; to generate a patch version.</p>
 <p><hr>
 <a name="properties/description"></a></p>
-<h3>description</h3>
+<h3 id="description">description</h3>
 <p>Put a description in it. It&#39;s a string. This helps people discover your system, as it&#39;s listed in <code>quill list</code>.</p>
 <p><hr>
 <a name="properties/dependencies"></a></p>
-<h3>dependencies</h3>
+<h3 id="dependencies">dependencies</h3>
 <p>Dependencies are specified with a simple hash of system name to version range. The version range is EITHER a string which has one or morespace-separated descriptors, OR a range like &quot;fromVersion - toVersion&quot;</p>
 <p>Version range descriptors may be any of the following styles, where &quot;version&quot; is a semver compatible version identifier.</p>
 <ul>
@@ -236,7 +264,7 @@ Also, it can&#39;t start with a dot or an underscore.</li>
     <span class="string">"thr"</span>: <span class="string">"3.3.x"</span>
   }
 }</code></pre>
-<h4>Tilde Version Ranges</h4>
+<h4 id="tilde-version-ranges">Tilde Version Ranges</h4>
 <p>A range specifier starting with a tilde <code>~</code> character is matched against a version in the following fashion.</p>
 <ul>
 <li>The version must be at least as high as the range.</li>
@@ -248,7 +276,7 @@ Also, it can&#39;t start with a dot or an underscore.</li>
 <li><code>&quot;~1.2&quot; = &quot;&gt;=1.2.0 &lt;2.0.0&quot;</code></li>
 <li><code>&quot;~1&quot; = &quot;&gt;=1.0.0 &lt;2.0.0&quot;</code></li>
 </ul>
-<h4>X Version Ranges</h4>
+<h4 id="x-version-ranges">X Version Ranges</h4>
 <p>An &quot;x&quot; in a version range specifies that the version number must start with the supplied digits, but any digit may be used in place of the x.</p>
 <p>The following are equivalent:</p>
 <ul>
@@ -261,7 +289,7 @@ Also, it can&#39;t start with a dot or an underscore.</li>
 <p>You may not supply a comparator with a version containing an x. Any digits after the first &quot;x&quot; are ignored.</p>
 <p><hr>
 <a name="properties/runlist"></a></p>
-<h3>runlist</h3>
+<h3 id="runlist">runlist</h3>
 <p>The key difference between language package managers like <code>npm</code> and OS package managers like <code>apt</code> is that <strong>order matters.</strong> The runlist property (similar to Chef) specifies the order in which <code>dependencies</code> should be installed.</p>
 <p>It should be an array of keys in the <code>dependencies</code> property:</p>
 <pre><code class="lang-js">{
@@ -271,19 +299,19 @@ Also, it can&#39;t start with a dot or an underscore.</li>
   },
   <span class="string">"runlist"</span>: [<span class="string">"ubuntu-base"</span>, <span class="string">"redis"</span>]
 }</code></pre>
-<h4>Implicit runlists</h4>
+<h4 id="implicit-runlists">Implicit runlists</h4>
 <p>No <code>runlist</code> property is necessary in the case when your system only has one dependency. In this case the <code>runlist</code> is implicit to be only that single dependency.</p>
 <p><hr>
 <a name="properties/os"></a></p>
-<h3>os</h3>
+<h3 id="os">os</h3>
 <p><hr>
 <a name="properties/remoteDependencies"></a></p>
-<h3>remoteDependencies</h3>
+<h3 id="remotedependencies">remoteDependencies</h3>
 <p>Remote dependencies are specified with a simple hash of system name to version range. The version range is EITHER a string which has one or morespace-separated descriptors, OR a range like &quot;fromVersion - toVersion&quot;. They specify systems running on remote servers.
 Detailed description of remote dependencies is available <a href="/system-json/remote-dependencies">here</a>.</p>
 <p><hr>
 <a name="properties/config"></a></p>
-<h3>config</h3>
+<h3 id="config">config</h3>
 <p>A &quot;config&quot; hash can be used to set configuration parameters used in system scripts that persist across upgrades. For
 instance, if a package had the following:</p>
 <pre><code class="lang-js">{
@@ -293,15 +321,15 @@ instance, if a package had the following:</p>
 <p>and then had a &quot;start&quot; command that then referenced the <code>npm_system_config_port</code> environment variable, then the user could override that by doing <code>npm config set foo:port 8001</code>.</p>
 <p><hr>
 <a name="properties/keywords"></a></p>
-<h3>keywords</h3>
+<h3 id="keywords">keywords</h3>
 <p>Put keywords in it. It&#39;s an array of strings. This helps people discover your system.</p>
 <p><hr>
 <a name="properties/homepage"></a></p>
-<h3>homepage</h3>
+<h3 id="homepage">homepage</h3>
 <p>The url to the project homepage.</p>
 <p><hr>
 <a name="properties/bugs"></a></p>
-<h3>bugs</h3>
+<h3 id="bugs">bugs</h3>
 <p>The url to your project&#39;s issue tracker and / or the email address to which issues should be reported. These are helpful for people who encounter issues with your system.</p>
 <p>It should look like this:</p>
 <pre><code class="lang-js">{
@@ -311,7 +339,7 @@ instance, if a package had the following:</p>
 <p>You can specify either one or both values. If you want to provide only a url, you can specify the value for &quot;bugs&quot; as a simple string instead of an object.</p>
 <p><hr>
 <a name="properties/people"></a></p>
-<h3>people fields: author, contributors</h3>
+<h3 id="people-fields-author-contributors">people fields: author, contributors</h3>
 <p>The &quot;author&quot; is one person. &quot;contributors&quot; is an array of people. A &quot;person&quot; is an object with a &quot;name&quot; field and optionally &quot;url&quot; and &quot;email&quot;, like this:</p>
 <pre><code class="lang-js">{
   <span class="string">"name"</span>: <span class="string">"Barney Rubble"</span>,
@@ -325,7 +353,7 @@ instance, if a package had the following:</p>
 <p>Both email and url are optional either way.</p>
 <p><hr>
 <a name="properties/repository"></a></p>
-<h3>repository</h3>
+<h3 id="repository">repository</h3>
 <p>Specify the place where your code lives. This is helpful for people who want to contribute.</p>
 <p>Do it like this:</p>
 <pre><code class="lang-js"><span class="string">"repository"</span>: {

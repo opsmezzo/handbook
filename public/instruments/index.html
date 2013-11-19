@@ -180,43 +180,40 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">Configuring with quill</h1>
+    <h1 class="title">Monitoring with Instruments</h1>
     <hr>
   </div>
-  <div class="content"><p><code>quill</code> is a configuration and system management tool. It is easy to think of it as an &quot;operating system agnostic package manager&quot;.</p>
-<p><img src="/img/screenshots/quill.png" /></p>
-<hr>
+  <div class="content"><p>OpsMezzo instruments is built on-top of <a href="/instruments/godot">Godot</a> <em>adding reactor primitives for orchestrating cloud applications:</em></p>
+<div style="text-align:center">
+  <img style="margin: 0 0 0 50px;" src="/img/instruments-overview.png" />
+  <br/><span><strong>Figure 1: High level Instruments architecture</strong></span>
+</div>
 
-<h3 id="learn-more">Learn more</h3>
+<p>OpsMezzo instruments adds reactors for handling common operations and monitoring tasks such as:</p>
 <ul>
-<li><a href="#usage">Basic Usage</a></li>
-<li><a href="/quill/aliases">Common Aliases</a></li>
-<li><a href="/quill/updating-systems">Updating Systems</a></li>
-<li>Resources<ul>
-<li><a href="/quill/resources/keys">Keys</a></li>
-<li><a href="/quill/resources/systems">Systems</a></li>
-<li><a href="/quill/resources/config">Config</a></li>
+<li><strong>Network monitoring:</strong> Concerned about network or HTTP latency? We&#39;ve got you covered.</li>
+<li><strong>Server and application provisioning:</strong> Wouldn&#39;t you like to just scale your app instead of <em>telling your ops team to scale your app?</em></li>
+<li><strong>SSH:</strong> Run arbitrary processes on demand to respond to incidents.</li>
+<li><strong>Process monitoring:</strong> Notify your team through alerting tools when crashes occur.</li>
 </ul>
+<p><hr></p>
+<ul>
+<li><a href="/instruments/agents">Configuring Instruments Agents</a></li>
+<li><a href="/instruments/metrics">Predefined Metrics &amp; Events</a></li>
+<li><a href="/instruments/multiplexing">High Performance Multiplexing</a></li>
+<li><a href="/instruments/streams">Understanding Streams</a></li>
+<li><a href="/instruments/reactors">Writing Custom Instrument Reactors</a><hr>
+
 </li>
 </ul>
-<hr>
+<h2 id="-"> </h2>
+<p>Lets consider how the above example, <em>emailing your ops team on high CPU load</em>, could be handled with Instruments:</p>
+<div style="text-align:center">
+  <img style="margin: 0 0 0 50px;" src="/img/instruments-email.png" />
+  <br/><span><strong>Figure 3: Data-flow for emailing your ops team on high CPU load</strong></span>
+</div>
 
-<p><a name="usage"></a></p>
-<h2 id="basic-usage">Basic Usage</h2>
-<p><code>quill</code> is a robust and fully-featured configuration toolset with a simple convention for executing commands:</p>
-<pre><code class="lang-bash">  $ quill &lt;resource&gt; &lt;command&gt;</code></pre>
-<p>for example: </p>
-<pre><code class="lang-bash">  $ quill systems list</code></pre>
-<p>will list all <code>system</code> Resources in your current registry. The tool itself is designed to be self documenting via the <code>quill help</code> command. For example to learn what the <code>systems list</code> command does:</p>
-<pre><code class="lang-bash">  $ quill help systems list
-  info:   Welcome to quill
-  info:   It worked <span class="keyword">if</span> it ends with quill ok
-  info:   Executing command help systems list
-  help:   Lists all systems <span class="keyword">in</span> the registry.
-  help:   
-  help:   quill list
-  help:   quill systems list
-  quill ok</code></pre>
+<p>Automating these common tasks frees up your developers and operations engineers to handle higher-level more important problems like <strong>building your application and your business.</strong></p>
 </div>
 </div></article>
     </section>

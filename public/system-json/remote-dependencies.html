@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -147,6 +137,44 @@
     </span>
   </span>
 </div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
+    </span>
+  </span>
+</div>
 </div>
       </aside>
 
@@ -159,7 +187,15 @@
 <p>For example, OpsMezzo backends, <code>conservatory</code> and <code>composer</code>, need CouchDB to operate. Thus, systems installing this software will have <code>couchdb</code> system in their <code>remoteDependencies</code>.</p>
 <hr>
 
-<h2>Example</h2>
+<ul>
+<li><a href="#simple-example">Simple example</a></li>
+<li><a href="#configuring-with-remotedependencies">Configuring with remoteDependencies</a></li>
+<li><a href="#provisioning-with-remotedependencies">Provisioning with remoteDependencies</a></li>
+<li><a href="#using-clusters">Using clusters with remoteDependencies</a></li>
+</ul>
+<hr>
+
+<h2 id="simple-example">Simple Example</h2>
 <p>Let&#39;s take a look at the <code>system.json</code> manifest for the <code>composer</code> system:</p>
 <pre><code class="lang-js">{
   <span class="string">"name"</span>: <span class="string">"composer"</span>,
@@ -174,7 +210,8 @@
   }
 }</code></pre>
 <p>By adding <code>couchdb</code> to the <code>system.json</code> manifest will enable two features for this system:</p>
-<h3>1. Configuration for remoteDependencies is available in <code>/scripts</code> and <code>/templates</code></h3>
+<p><a name="configuring-with-remotedependencies"></a></p>
+<h3 id="1-configuration-for-remotedependencies-is-available-in-scripts-and-templates-">1. Configuration for remoteDependencies is available in <code>/scripts</code> and <code>/templates</code></h3>
 <p>When this system is configured (e.g. using <code>quill configure composer</code>), the configuration for systems which satisfy the <code>remoteDependencies</code> will be available. The <code>composer</code> system takes advantage of this in it&#39;s templates:</p>
 <p><strong>/templates/composer.json</strong></p>
 <pre><code class="lang-js">{
@@ -199,10 +236,29 @@
 }</code></pre>
 </li>
 </ul>
-<h3>2. Remote dependencies will be satisfied when provisioning</h3>
+<p><a name="provisioning-with-remotedependencies"></a></p>
+<h3 id="2-remote-dependencies-will-be-satisfied-when-provisioning">2. Remote dependencies will be satisfied when provisioning</h3>
 <p>When a server with this <code>system.json</code> is provisioned using <a href="/baton">baton</a> or <code>conservatory</code>, we will ensure that all of the <code>remoteDependencies</code> exist on servers that are running. <strong>If the <code>remoteDependencies</code> are not satisfied initially then <a href="/baton">baton</a> or <code>conservatory</code> will provision them <em>before provisioning the composer server.</em></strong></p>
 <p>In our <code>composer</code> example, that means that <strong>if a server running <code>couchdb</code> does not exist then one will be created <em>before provisioning the composer server.</em></strong></p>
 <pre><code>  baton servers create --role composer --prepare</code></pre>
+<p><a name="provisioning-with-remotedependencies"></a></p>
+<h3 id="3-remote-dependencies-can-be-satisfied-from-unique-clusters">3. Remote dependencies can be satisfied from unique clusters</h3>
+<p>By default: the list of servers used to satisfy a remoteDependencies for a given server is <em>all servers running that dependency in the same group.</em> <strong>Clusters are a more granular way to organize your servers.</strong> For example consider:</p>
+<ul>
+<li>There are two CouchDB servers in the same group: one for <em>production</em> and one for <em>staging</em></li>
+<li>You wish to provision a <code>composer</code> server in that group which only uses the <em>staging</em> CouchDB server.</li>
+</ul>
+<p>By default you would not be able to determine which server would appear first in the list of servers so</p>
+<p><strong>config.json</strong></p>
+<pre><code class="lang-js">  {
+    <span class="string">"couchdb"</span>: <span class="string">"{{ servers.couchdb.0.public.0 }}"</span>
+  }</code></pre>
+<p>could be pointing to the wrong server. <strong>Clusters allow you solve this problem elegantly.</strong> Assuming that the <em>production</em> CouchDB server has been placed in the <code>production</code> cluster and the <em>staging</em> CouchDB server has been placed in the <code>staging</code> cluster you can tell <code>baton</code> and <code>quill</code> to use only one (or more) cluster:</p>
+<h4 id="clusters-in-baton-">Clusters in <code>baton</code></h4>
+<pre><code>  baton servers create --role composer --cluster production --config production --prepare</code></pre>
+<h4 id="clusters-in-quill-">Clusters in <code>quill</code></h4>
+<pre><code>  baton configure composer --cluster production --config production</code></pre>
+<p>If there is no CouchDB in <code>production</code> cluster, <code>baton</code> will create one for you (just like it would create a remote dependency).</p>
 </div>
 </div></article>
     </section>

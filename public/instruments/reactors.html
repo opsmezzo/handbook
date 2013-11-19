@@ -180,43 +180,127 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">Configuring with quill</h1>
+    <h1 class="title">Writing Custom Reactors</h1>
     <hr>
   </div>
-  <div class="content"><p><code>quill</code> is a configuration and system management tool. It is easy to think of it as an &quot;operating system agnostic package manager&quot;.</p>
-<p><img src="/img/screenshots/quill.png" /></p>
-<hr>
-
-<h3 id="learn-more">Learn more</h3>
+  <div class="content"><p>Godot is a monitoring solution that met our needs of:</p>
 <ul>
-<li><a href="#usage">Basic Usage</a></li>
-<li><a href="/quill/aliases">Common Aliases</a></li>
-<li><a href="/quill/updating-systems">Updating Systems</a></li>
-<li>Resources<ul>
-<li><a href="/quill/resources/keys">Keys</a></li>
-<li><a href="/quill/resources/systems">Systems</a></li>
-<li><a href="/quill/resources/config">Config</a></li>
+<li>Able to handle thousands of messages per second.</li>
+<li>Scaling to accommodate the dynamic needs of thousands of applications.</li>
+<li>Flexibility to make decisions based on various criteria.</li>
 </ul>
-</li>
-</ul>
-<hr>
+<p>The events that <code>godot</code> processes are simple JSON, with a single <code>metric</code> property representing <em>a single numeric value for the event.</em></p>
+<pre><code>{
+  host:         &quot;A hostname, e.g. &#39;api1&#39;, &#39;foo.com&#39;&quot;
+  service:      &quot;e.g. &#39;API port 8000 reqs/sec&#39;&quot;,
+  state:        &quot;Any string less than 255 bytes, e.g. &#39;ok&#39;, &#39;warning&#39;, &#39;critical&#39;&quot;,
+  time:         &quot;The time of the event, in unix epoch seconds&quot;,
+  description:  &quot;Freeform text&quot;,
+  tags:         &quot;Freeform list of strings, e.g. [&#39;rate&#39;, &#39;fooproduct&#39;, &#39;transient&#39;]&quot;
+  meta:         &quot;Freeform set of key:value pairs e.g. { &#39;ewma&#39;: 12345 }&quot;,
+  metric:       &quot;A number associated with this event, e.g. the number of reqs/sec.&quot;
+  ttl:          &quot;A floating-point time, in seconds, that this event is valid for.&quot;
+}</code></pre>
+<h2 id="introducing-godot">Introducing Godot</h2>
+<p>Lets jump right in. A common use-case for monitoring is ensuring that everything is still running using <a href="http://en.wikipedia.org/wiki/Heartbeat_network">heartbeats</a>. In <code>godot</code> you just need to declare <em>a client to send heartbeats and a server to ensure heartbeats are received.</em></p>
+<p>Both of these operations can be done <strong>in a single line of Javascript.</strong> First lets focus on the server:</p>
+<p><strong>server.js</strong></p>
+<pre><code>var godot = require(&#39;godot&#39;);
 
-<p><a name="usage"></a></p>
-<h2 id="basic-usage">Basic Usage</h2>
-<p><code>quill</code> is a robust and fully-featured configuration toolset with a simple convention for executing commands:</p>
-<pre><code class="lang-bash">  $ quill &lt;resource&gt; &lt;command&gt;</code></pre>
-<p>for example: </p>
-<pre><code class="lang-bash">  $ quill systems list</code></pre>
-<p>will list all <code>system</code> Resources in your current registry. The tool itself is designed to be self documenting via the <code>quill help</code> command. For example to learn what the <code>systems list</code> command does:</p>
-<pre><code class="lang-bash">  $ quill help systems list
-  info:   Welcome to quill
-  info:   It worked <span class="keyword">if</span> it ends with quill ok
-  info:   Executing command help systems list
-  help:   Lists all systems <span class="keyword">in</span> the registry.
-  help:   
-  help:   quill list
-  help:   quill systems list
-  quill ok</code></pre>
+//
+// Reactor server which will email `user@host.com`
+// whenever any service matching /.*\/health\/heartbeat/
+// fails to check in after 60 seconds.
+//
+godot.createServer({
+  //
+  // Defaults to tcp
+  //
+  type: &#39;tcp&#39;,
+  reactors: [
+    godot.reactor()
+      .where(&#39;service&#39;, &#39;*/health/heartbeat&#39;)
+      .expire(1000 * 60)
+      .email({ to: &#39;user@host.com&#39; })
+  ]
+}).listen(9876);</code></pre>
+<p>Now that the server is listening for connections from heartbeat clients, lets create a client to start sending messages.</p>
+<p><strong>client.js</strong></p>
+<pre><code>var godot = require(&#39;godot&#39;);
+
+//
+// Producer client which sends events for the service
+// `app.server/health/heartbeat` every 15 seconds.
+//
+godot.createClient({
+  //
+  // Defaults to TCP
+  //
+  type: &#39;tcp&#39;,
+  producers: [
+    godot.producer({
+      host: &#39;app.server.com&#39;
+      service: &#39;app.server/health/heartbeat&#39;,
+      ttl: 1000 * 15
+    })
+  ]
+}).connect(9876);</code></pre>
+<p>Both the <code>.createClient</code> and the .<code>createServer</code> methods of <code>godot</code> accept <strong>multiple producers and reactors</strong> <em>(respectively)</em> allowing you to compose complex behavior from multiple simple streams.</p>
+<p><img style="margin: 0 0 0 150px;" src="/img/godot-overview.png" />
+<br/><span style="margin-left:170px"><strong>Figure 1: High-level Godot Architecture</strong></span></p>
+<p>Lets examine the dataflow of a simple reactor that sends <code>ops@host.com</code> an email whenever the CPU load of a server goes above 50%.</p>
+<pre><code class="lang-js">godot.reactor()
+  .where(<span class="string">'service'</span>, <span class="string">'cpu'</span>)
+  .over(<span class="number">50</span>)
+  .email({ to: <span class="string">'ops@host.com'</span> });</code></pre>
+<p><img style="margin: 0 0 0 50px;" src="/img/email-flow.png" />
+<br/><span style="margin-left:170px"><strong>Figure 2: Data-flow for sending email on high CPU load</strong></span></p>
+<p>This is obviously <em>very naive</em> and you should probably perform somekind of <a href="http://en.wikipedia.org/wiki/Exponential_smoothing#The_exponential_moving_average">exponentially decaying moving average</a> to avoid false-positives on short-lived spikes (<code>godot</code> has EWMA built-in via the <a href="https://github.com/indexzero/window-stream">window-stream</a> module).</p>
+<pre><code class="lang-js"><span class="keyword">var</span> windowStream = require(<span class="string">'window-stream'</span>),
+    godot = require(<span class="string">'godot'</span>);
+
+<span class="keyword">var</span> M1_ALPHA = <span class="number">1</span> - Math.exp(-<span class="number">5</span>/<span class="number">60</span>);
+
+godot.reactor()
+  .where(<span class="string">'service'</span>, <span class="string">'cpu'</span>)
+  .movingAverage({
+    average: {
+      type: <span class="string">'exponential'</span>,
+      alpha: M1_ALPHA
+    },
+    window: <span class="keyword">new</span> windowStream.EventWindow({ size: <span class="number">10</span> })
+  })
+  .over(<span class="number">50</span>)
+  .email({ to: <span class="string">'ops@host.com'</span> });</code></pre>
+<h2 id="performance">Performance</h2>
+<p>Before writing this, I noticed a recent post from <a href="http://aphyr.com/posts/269-reaching-200k-events-sec">aphyr</a> (the author of Riemann) discussing in intimate detail how he has achieved <em>200k messages per second in Riemann.</em> This intrigued me to see just how this little node program stacked up:</p>
+<pre><code>node test/perf/pummel.js -c 5
+Starting performance test with:
+  network protocol  tcp
+  concurrency:      5
+  sampling interval 10s
+  duration:         10s
+  ttl:              0
+  port:             10557
+
+Starting reactor 1
+Starting producer 1
+Starting producer 2
+Starting producer 3
+Starting producer 4
+Starting producer 5
+
+Now receiving messages...
+
+Received:
+  1069482 total messages
+  106948.2 per second</code></pre>
+<p>So <em>with little or no attention paid to performance</em> we&#39;re already processing <strong>100k messages per second in node.</strong> This makes sense because this sort of IO bound application is exactly what node.js was designed for. I suspect (but have not yet had the time to investigate) that this 100k / second benchmark could be faster because it is deficient in several places:</p>
+<ol>
+<li>Single reactor process: the underlying sockets are not shared between multiple processes.</li>
+<li>Not distributed: this benchmark was both producing and consuming data from the same machine, so there would be plenty of spare CPU if the messages were produced on a second machine.</li>
+<li>No framing: As aphyr points out, combing multiple messages into a single TCP packet can greatly increase network throughput, I&#39;m eager to try this out.</li>
+</ol>
 </div>
 </div></article>
     </section>

@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -144,6 +134,44 @@
   </span><span class="tree">
     <span class="page-details">
       <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
     </span>
   </span>
 </div>
@@ -166,7 +194,7 @@
 </ul>
 <p><hr>
 <a name="resources"></a></p>
-<h2>CLI Resources</h2>
+<h2 id="cli-resources">CLI Resources</h2>
 <p>Similar to <a href="https://github.com/nodejitsu/jitsu"><code>jitsu</code></a>, all operations are broken up into logical resources which represent a set of actions on entities like <code>servers</code> or <code>systems</code>. </p>
 <pre><code>  $ baton &lt;resource&gt; &lt;command&gt;</code></pre>
 <p>The list of common resources is displayed in the default help for both <a href="/baton"><code>baton</code></a> and <a href="/quill"><code>quill</code></a>:</p>
@@ -195,7 +223,7 @@ help:   Options:
 <p><em><strong>Remark:</strong> The above is equivalent to</em> <code>baton servers --help</code> <em>or</em> <code>baton servers -h</code>.</p>
 <p><hr>
 <a name="aliases"></a></p>
-<h2>Common Aliases</h2>
+<h2 id="common-aliases">Common Aliases</h2>
 <p>Most common operations have a short-hand or <em>alias.</em> For example to list all systems available with <code>quill</code> the following two commands are equivalent:</p>
 <pre><code>  $ quill systems list
   $ quill list</code></pre>
@@ -206,7 +234,7 @@ help:   Options:
 </ul>
 <p><hr>
 <a name="prompts"></a></p>
-<h2>Prompts and Overrides</h2>
+<h2 id="prompts-and-overrides">Prompts and Overrides</h2>
 <p>Many of the commands in both <code>baton</code> and <code>quill</code> have additional CLI parameters. If these parameters are not provided you will be prompted to enter them.</p>
 <p>Most commands display the available prompts in their CLI help.</p>
 </div>

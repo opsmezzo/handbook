@@ -180,43 +180,67 @@
 
       <article class="column eighthalfcol last" id="content" role="main"><div>
   <div class="page-details">
-    <h1 class="title">Configuring with quill</h1>
+    <h1 class="title">High Performance Multiplexing</h1>
     <hr>
   </div>
-  <div class="content"><p><code>quill</code> is a configuration and system management tool. It is easy to think of it as an &quot;operating system agnostic package manager&quot;.</p>
-<p><img src="/img/screenshots/quill.png" /></p>
-<hr>
-
-<h3 id="learn-more">Learn more</h3>
+  <div class="content"><p>Information about hosts will come from two distinct places:</p>
 <ul>
-<li><a href="#usage">Basic Usage</a></li>
-<li><a href="/quill/aliases">Common Aliases</a></li>
-<li><a href="/quill/updating-systems">Updating Systems</a></li>
-<li>Resources<ul>
-<li><a href="/quill/resources/keys">Keys</a></li>
-<li><a href="/quill/resources/systems">Systems</a></li>
-<li><a href="/quill/resources/config">Config</a></li>
+<li><em>Load Balancers:</em> will provide metrics about incoming HTTP requests.</li>
+<li><em>Servers:</em> will provider metrics about server and application (i.e. process) health</li>
+</ul>
+<p>In order to make an informed decision about the state of an application or service a given <code>godot</code> processor <strong>must know about all metrics for that application or service.</strong> As such there are two ways this can be accomplished.</p>
+<ol>
+<li>By having each processor forward messages it should not handle to the appropriate processor.</li>
+<li>By having a distinct set of multiplexers that route messages appropriately. </li>
+</ol>
+<p><strong>(2) is preferred because it separates these concerns and reduces the complexity of the processors themselves.</strong> Therefore the diagram below specifies the network throughput for processing <code>godot</code> messages. </p>
+<p><img src="http://f.cl.ly/items/1q0M1I2I2N1O3u0Y2U0A/multiplexer.png" alt=""></p>
+<p>The data flow for an indivdual metric in the diagram above is:</p>
+<ol>
+<li>Metric is produced by a <em>Load Balancer</em> or <em>Server</em><ul>
+<li>Each balancers will produce events for many applications; the number of apps is non-deterministic</li>
+<li>Each app host will produce events for a single drone that need to be aggregated for correct decisions.</li>
 </ul>
 </li>
+<li>Metric is routed to any multiplexer<ul>
+<li>Any producer can connect to any multiplexer and it will route it to the correct processor.</li>
 </ul>
-<hr>
-
-<p><a name="usage"></a></p>
-<h2 id="basic-usage">Basic Usage</h2>
-<p><code>quill</code> is a robust and fully-featured configuration toolset with a simple convention for executing commands:</p>
-<pre><code class="lang-bash">  $ quill &lt;resource&gt; &lt;command&gt;</code></pre>
-<p>for example: </p>
-<pre><code class="lang-bash">  $ quill systems list</code></pre>
-<p>will list all <code>system</code> Resources in your current registry. The tool itself is designed to be self documenting via the <code>quill help</code> command. For example to learn what the <code>systems list</code> command does:</p>
-<pre><code class="lang-bash">  $ quill help systems list
-  info:   Welcome to quill
-  info:   It worked <span class="keyword">if</span> it ends with quill ok
-  info:   Executing command help systems list
-  help:   Lists all systems <span class="keyword">in</span> the registry.
-  help:   
-  help:   quill list
-  help:   quill systems list
-  quill ok</code></pre>
+</li>
+<li>Metric is routed to the appropriate processor by the multiplexer using the <a href="#service-registry">Service Registry</a><ul>
+<li>Processors need to have all events for a single application in the same process.</li>
+</ul>
+</li>
+<li>Metric is processed and forward to long-term storage and any realtime listeners. </li>
+</ol>
+<h2 id="service-registry">Service Registry</h2>
+<p>The <em>Service Registry</em> required for our <code>godot</code> multiplexers is similar to the existing lookup tables used by <code>balanceboard</code>, but only requires lookup by <code>host</code>. Since these multiplexers will handle metrics for both <code>apps</code> (on <a href="#nodejitsu">Nodejitsu</a>) and <code>systems</code> (on <a href="#conservatory">Conservatory</a>) it will need to work with both databases.</p>
+<p>Here&#39;s an example of what the data-structure for the <em>Service Registry</em> will look like:</p>
+<pre><code class="lang-js">  {
+    lookup: {
+      <span class="comment">//</span>
+      <span class="comment">// Three hosts being routed to the same processor</span>
+      <span class="comment">//</span>
+      <span class="string">"10.0.0.1"</span>: { host: <span class="string">"producer-3rt6.jit.su"</span>, port: <span class="number">10556</span> },
+      <span class="string">"10.0.0.2"</span>: { host: <span class="string">"producer-3rt6.jit.su"</span>, port: <span class="number">10556</span> },
+      <span class="string">"10.0.0.3"</span>: { host: <span class="string">"producer-3rt6.jit.su"</span>, port: <span class="number">10556</span> }
+    },
+    uids: {
+      <span class="string">"10.0.0.1"</span>: <span class="string">"indexzero/sudomakethought"</span>,
+      <span class="string">"10.0.0.2"</span>: <span class="string">"indexzero/sudomakethought"</span>,
+      <span class="string">"10.0.0.3"</span>: <span class="string">"indexzero/sudomakethought"</span>
+    },
+    hosts: {
+      <span class="string">"indexzero/sudomakethought"</span>: [
+        <span class="string">"10.0.0.1"</span>,
+        <span class="string">"10.0.0.2"</span>,
+        <span class="string">"10.0.0.3"</span>
+      ]
+    }
+  }</code></pre>
+<h3 id="nodejitsu">Nodejitsu</h3>
+<p>The lookup table for the <em>Service Registry</em> can be calculated from <code>_design/App/_view/balancerInfo</code>.</p>
+<h3 id="conservatory">Conservatory</h3>
+<p>The lookup table for the <em>Service Registry</em> can be calculated from <code>_design/Server/_view/all</code> and <code>_design/Role/_view/all</code>.</p>
 </div>
 </div></article>
     </section>

@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -144,6 +134,44 @@
   </span><span class="tree">
     <span class="page-details">
       <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
     </span>
   </span>
 </div>
@@ -167,20 +195,20 @@
 </ul>
 <p><hr>
 <a name="hierarchy"></a></p>
-<h2>Configuration hierarchy</h2>
+<h2 id="configuration-hierarchy">Configuration hierarchy</h2>
 <p>The total configuration available to a system.json package is the combination of several levels of configuration hierarchy. The priority of this hierarchy (from highest priority to lowest) is:</p>
 <pre><code>  ├─ `quill --config [key]=[value] --config [name]`
   ├─ Group
   ├─ Role
   └─ System</code></pre>
 <p>So if a <code>key</code> is set in both the [named remote configuration][quill-config] specified by <code>quill --config [name]</code> <strong>and</strong> set by the [named remote configuration][quill-config] specified by the Group, <strong>the value from <code>quill --config [name]</code> will be used.</strong></p>
-<h3>1. quill --config [key]=[value] --config [name]</h3>
+<h3 id="1-quill-config-key-value-config-name-">1. quill --config [key]=[value] --config [name]</h3>
 <p>The <code>--config</code> parameter when running any <em>lifecycle action</em> in <code>quill</code>.</p>
-<h3>2. Group</h3>
+<h3 id="2-group">2. Group</h3>
 <p>[Named remote configuration][quill-config] set on a <a href="/baton/resources/group">group</a>. Group-specific settings (e.g. master API address, file server address or external service login credentials).</p>
-<h3>3. Role</h3>
+<h3 id="3-role">3. Role</h3>
 <p>[Named remote configuration][quill-config] set on a <a href="/baton/resources/role">role</a>. Role-specific settings (e.g. monitoring systems to enable on a host).</p>
-<h3>4. System</h3>
+<h3 id="4-system">4. System</h3>
 <p>Default system-specified configuration set on the <code>system.json</code> file (e.g. default login password or config file name):</p>
 <p><strong>system.json</strong></p>
 <pre><code class="lang-js">  {
@@ -194,10 +222,10 @@
   }</code></pre>
 <p><hr>
 <a name="scripts-files"></a></p>
-<h2>Using configuration in system.json files and scripts</h2>
+<h2 id="using-configuration-in-system-json-files-and-scripts">Using configuration in system.json files and scripts</h2>
 <p>For the purposes of configuring systems during a given <em>lifecycle-action</em>, <code>quill</code> supports two ways of injecting config values into files and scripts.</p>
 <p><a name="scripts"></a></p>
-<h3>Setting environment variables in system.json scripts</h3>
+<h3 id="setting-environment-variables-in-system-json-scripts">Setting environment variables in system.json scripts</h3>
 <p>When running any scripts (Bash, etc) scripts for a <em>lifecycle-action</em> <code>quill</code> passes the configuration into process via environment variables.</p>
 <p>Following config:</p>
 <pre><code class="lang-js">  {
@@ -229,7 +257,7 @@
   quill_value: 42
   q_value: 42</code></pre>
 <p><a name="files"></a></p>
-<h3>Templating system.json files</h3>
+<h3 id="templating-system-json-files">Templating system.json files</h3>
 <p>Before executing lifecycle scripts, all files located under the <code>/templates</code> directory for a given system are templated accordingly to configuration fetched by <code>quill</code>.</p>
 <p>File:</p>
 <pre><code>  host = {{ host }}
@@ -257,7 +285,7 @@
 <p><strong>Important:</strong> If a configuration key is not found when attempting to template a file <code>quill</code> will respond with an error:</p>
 <pre><code>  error: Error running command install config
   error: Missing configuration value: nested in ~/.quill/installed/&lt;system&gt;/&lt;version&gt;/templates/&lt;filename&gt;</code></pre>
-<h4>Array Indexing</h4>
+<h4 id="array-indexing">Array Indexing</h4>
 <p><code>quill</code> also supports indexing into Arrays when templating files:</p>
 <pre><code>  hostname = {{ hosts.0 }}</code></pre>
 <p>when configuration is:</p>
@@ -266,7 +294,7 @@
   }</code></pre>
 <p>will be turned into:</p>
 <pre><code>  hostname = host0</code></pre>
-<h4>Dynamic configuration keys</h4>
+<h4 id="dynamic-configuration-keys">Dynamic configuration keys</h4>
 <p>Often you need to make decision at configure-time regarding which value in a larger [named remote configuration][quill-config] should be used. In other words, you want the key used to be dynamic. For example:</p>
 <pre><code>  hostname = {{ envs.{{ current }}.hostname }}</code></pre>
 <p>when configuration is:</p>
@@ -281,7 +309,7 @@
 <p>will be turned into:</p>
 <pre><code>  hostname = prod.mysite.com</code></pre>
 <p><a name="remote-dependencies"></a></p>
-<h2>Configuration for remoteDependencies</h2>
+<h2 id="configuration-for-remotedependencies">Configuration for remoteDependencies</h2>
 <p>When a <a href="/system-json">system.json</a> package has <a href="/system-json/remote-dependencies">remoteDependencies</a>, the information about servers which satisfy them is available for both <code>/scripts</code> and <code>/templates</code>.</p>
 <p>For more information on <a href="/system-json/remote-dependencies">remoteDependencies</a>, see the <a href="/system-json/remote-dependencies">full article on them.</a></p>
 </div>

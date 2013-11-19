@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="/css/api.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
+    .navigation h1 { overflow: visible; }
     .opsmezzo {
       background: #fff url('/img/opsmezzo-logo-text.png') no-repeat 0 0;
-      margin: 0;
+      margin: -20px 0 0 0;
       float: left;
       height: 96px;
       width: 280px;
@@ -35,7 +36,7 @@
         <a href="/" class="opsmezzo" title="Back to the homepage">OpsMezzo</a>
       </h1>
       <a href="#navigation" class="mobile btn ss-rows"></a>
-      <a href="https://www.opsmezzo.com" class=" login right btn" title="Back to opsmezzo.com">
+      <a href="https://www.opsmezzo.com" class="login right btn" title="Back to opsmezzo.com">
         <s class="ss-home" role="presentation"></s>
         home
       </a>
@@ -85,22 +86,7 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/api" class="title">RESTful APIs</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/composer" class="title">Composer API Reference</a>
-    </span>
-  </span><span class="tree">
-    <span class="page-details">
-      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
-    </span>
-  </span>
-</div>
-<div class="vertical-tabs">
-  <span class="tree">
-    <span class="page-details">
-      <a href="/quill" class="title">Using quill</a>
+      <a href="/quill" class="title">Configuring with quill</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -127,7 +113,11 @@
 <div class="vertical-tabs">
   <span class="tree">
     <span class="page-details">
-      <a href="/baton" class="title">Using baton</a>
+      <a href="/baton" class="title">Orchestrating with baton</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/baton/providers" class="title">Adding IaaS Providers</a>
     </span>
   </span><span class="tree">
     <span class="page-details">
@@ -144,6 +134,44 @@
   </span><span class="tree">
     <span class="page-details">
       <a href="/baton/ssh-keys" class="title">Managing SSH keys</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/instruments" class="title">Monitoring with Instruments</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/multiplexing" class="title">High Performance Multiplexing</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/metrics" class="title">Predefined Metrics & Events</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/streams" class="title">Understanding Streams</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/instruments/reactors" class="title">Writing Custom Reactors</a>
+    </span>
+  </span>
+</div>
+<div class="vertical-tabs">
+  <span class="tree">
+    <span class="page-details">
+      <a href="/api" class="title">RESTful APIs</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/composer" class="title">Composer API Reference</a>
+    </span>
+  </span><span class="tree">
+    <span class="page-details">
+      <a href="/api/conservatory" class="title">Conservatory API Reference</a>
     </span>
   </span>
 </div>
@@ -164,26 +192,27 @@
 <p><img src="/img/baton-bootstrapping.png" /></p>
 <hr>
 
-<h2>Common options</h2>
+<h2 id="common-options">Common options</h2>
 <pre><code>  --name       Server name
   --flavor-id  Size of the server (e.g. 256MB RAM)
   --image-id   Image to use on the server (e.g. Ubuntu 11.10)
-  --group      Group name server will be placed into</code></pre>
+  --group      Group name server will be placed into
+  --cluster    Cluster name(s) which this server belongs to.</code></pre>
 <hr>
 
-<h2>baton servers createimage</h2>
+<h2 id="baton-servers-createimage">baton servers createimage</h2>
 <p>Creates and bootstraps a server: <code>quill</code> and dependent systems are installed to the new VM via <code>scp</code> and <code>ssh</code>. <em>No configuration is applied</em></p>
 <p><strong>Options</strong></p>
 <pre><code>  --role  Role of the server created</code></pre>
 <hr>
 
-<h2>baton servers create</h2>
+<h2 id="baton-servers-create">baton servers create</h2>
 <p>Creates a server from a bootstrapped image (see: <code>baton servers createimage</code>). No files are directly copied, but any systems for the <code>role</code> provided are <em>installed, configured, and started</em></p>
 <pre><code>  --role    Role of the server created
   --prepare Bootstraps the server without relying on image being bootstrapped</code></pre>
 <hr>
 
-<h2>baton servers createbatch</h2>
+<h2 id="baton-servers-createbatch">baton servers createbatch</h2>
 <p>Executes <code>baton servers create</code> multiple times.</p>
 <p>Creates a given number of servers from a bootstrapped image (see: <code>baton servers createimage</code>). No files are directly copied, but any systems for the <code>role</code> provided are <em>installed, configured, and started</em></p>
 <pre><code>  --role         Role of the server created
@@ -191,7 +220,7 @@
   --batch-length Total number of servers to create</code></pre>
 <hr>
 
-<h2>baton servers createraw</h2>
+<h2 id="baton-servers-createraw">baton servers createraw</h2>
 <p>Creates a server with no additional files or script executions: plain &#39;ol vanilla server image. </p>
 </div>
 </div></article>
